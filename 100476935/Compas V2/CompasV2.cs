@@ -7,9 +7,9 @@ namespace _100476935
 {
     public class CompasV2 : ICritterController
     {
-        Point goal = new Point(-1, -1);
-        bool headingForGoal = false;
 
+        public CompasV2Map map;
+    
         public string Name { get; set; }
 
         public Send Responder { get; set; }
@@ -117,34 +117,22 @@ namespace _100476935
             {
                 case "LAUNCH":
                     LoadSettings();
-                    Responder("GET_ARENA_SIZE:2081");
+                    Responder("GET_ARENA_SIZE:2082");
                     break;
-                case "SHUTDOWN":
-                    break;
+                case "ARENA_SIZE":
+                    
+                        break;
+                    
+
+
                 case "SCAN":
                     break;
                 case "REACHED_DESTINATION":
-                case "FIGHT":
-                case "BUMP":
-                    break;
                 case "SEE":
-                    break;
-                case "LEVEL_TIME_REMAINING":
                     break;
                 case "ERROR":
                     break;
             }
         }
-
-        private void See(string message)
-        {
-          
-        }
-
-        private void Scan(string message)
-        {
-           
-        }
-
     }
 }

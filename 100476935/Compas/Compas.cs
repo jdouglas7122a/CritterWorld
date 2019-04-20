@@ -131,7 +131,7 @@ namespace _100476935
 
                     break;
                 case "ARENA_SIZE":
-                    map = new CompasMap(message.Substring(0, 16));
+                    map = new CompasMap(message.Substring(16));
                     map.CreateMap();
                     Responder("GET_LOCATION:2081");
                     break;
