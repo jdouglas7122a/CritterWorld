@@ -21,14 +21,14 @@ namespace _100476935
     }
 
 
-    public class Map
+    public class CompasMap
     {
         public int mapWidth;
         public int mapHeight;
         public MapSector[,] mapInfo;
         public Point critterLocation { get; set; }
 
-        public Map(string _dimensions) // recieves just the number part of the message, no splitting in method
+        public CompasMap(string _dimensions) // recieves just the number part of the message, no splitting in method
         {
             string[] holder = _dimensions.Split(':');
             mapWidth = int.Parse(holder[0]);

@@ -21,7 +21,7 @@ namespace _100476935
 
         public int HeadForExitSpeed { get; set; } = 5;
 
-        Map map;
+        CompasMap map;
         Moving movment;
         Point goal = new Point(-1, -1);
 
@@ -131,7 +131,7 @@ namespace _100476935
 
                     break;
                 case "ARENA_SIZE":
-                    map = new Map(message.Substring(0, 16));
+                    map = new CompasMap(message.Substring(0, 16));
                     map.CreateMap();
                     Responder("GET_LOCATION:2081");
                     break;

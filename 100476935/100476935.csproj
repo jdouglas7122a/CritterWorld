@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\CritterWorld\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\CritterWorld\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -43,21 +43,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Compas.cs" />
-    <Compile Include="CompasSettings.cs">
+    <Compile Include="Compas V2\CompasV2.cs" />
+    <Compile Include="Compas V2\CompasV2Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CompasSettings.Designer.cs">
+    <Compile Include="Compas V2\CompasV2Settings.Designer.cs">
+      <DependentUpon>CompasV2Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compas\Compas.cs" />
+    <Compile Include="Compas\CompasSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compas\CompasSettings.Designer.cs">
       <DependentUpon>CompasSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="ControllerFactory.cs" />
-    <Compile Include="Mapping.cs" />
-    <Compile Include="Moving.cs" />
+    <Compile Include="Compas\Mapping.cs" />
+    <Compile Include="Compas\Moving.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wanderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CompasSettings.resx">
+    <EmbeddedResource Include="Compas V2\CompasV2Settings.resx">
+      <DependentUpon>CompasV2Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compas\CompasSettings.resx">
       <DependentUpon>CompasSettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

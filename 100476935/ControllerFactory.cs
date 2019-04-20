@@ -14,9 +14,13 @@ namespace _100476935
         public ICritterController[] GetCritterControllers()
         {
             List<ICritterController> controllers = new List<ICritterController>();
-            for (int i = 0; i < 25; i++)
+
+            controllers.Add(new Compas("Compas" + (1)));
+            controllers.Add(new CompasV2("CompasV2_" + 1));
+
+            for (int i = 0; i < 23; i++)
             {
-                controllers.Add(new Compas("Compas" + (i + 1)));
+                controllers.Add(new Wanderer("Wanderer" + (i + 1)));
             }
             return controllers.ToArray();
         }

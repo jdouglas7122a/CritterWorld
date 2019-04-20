@@ -10,7 +10,7 @@ namespace _100476935
 
     public class Moving
     {
-        public string MoveCritter(Point _location, Map _mapData) //recieves critter location and the general map data
+        public string MoveCritter(Point _location, CompasMap _mapData) //recieves critter location and the general map data
         {
             Point goal = new Point();
             Dictionary<Point, Boolean> MapPoints = new Dictionary<Point, bool>();
