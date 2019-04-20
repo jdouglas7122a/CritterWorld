@@ -7,11 +7,7 @@ namespace _100476935
 {
     public class Compas : ICritterController
     {
-        Map map;
-        Moving movment;
-        Point goal = new Point(-1, -1);
-        System.Timers.Timer getInfoTimer;
-        bool headingForGoal = false;
+
 
         public string Name { get; set; }
 
@@ -24,6 +20,10 @@ namespace _100476935
         public int EatSpeed { get; set; } = 5;
 
         public int HeadForExitSpeed { get; set; } = 5;
+
+        Map map;
+        Moving movment;
+        Point goal = new Point(-1, -1);
 
         private static Point PointFrom(string coordinate)
         {
@@ -128,6 +128,7 @@ namespace _100476935
                 case "LAUNCH":
                     LoadSettings();
                     Responder("GET_ARENA_SIZE:2081");
+
                     break;
                 case "ARENA_SIZE":
                     map = new Map(message.Substring(0, 16));
@@ -147,7 +148,6 @@ namespace _100476935
                     break;
 
                 case "SHUTDOWN":
-                    getInfoTimer.Stop();
                     break;
                 case "REACHED_DESTINATION":
                     Responder(movment.MoveCritter(map.critterLocation, map));

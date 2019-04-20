@@ -16,7 +16,6 @@ namespace _100476935
             List<ICritterController> controllers = new List<ICritterController>();
             for (int i = 0; i < 25; i++)
             {
-                controllers.Add(new Wanderer("Wanderer" + (i + 1)));
                 controllers.Add(new Compas("Compas" + (i + 1)));
             }
             return controllers.ToArray();
