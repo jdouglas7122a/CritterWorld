@@ -99,12 +99,15 @@ namespace _100476935
             return result;
         }
 
-        public void UpdateCritterLocation(string _message)
+        public void UpdateCritterLocation(string _message)  
         {
-
-
+            _message = _message.Substring(_message.IndexOf("2082") + 8); 
+            string[] holder = new string[2];
+            holder[0] = _message.Substring(0,_message.IndexOf(',')); 
+            holder[1] = _message.Substring(_message.IndexOf(','), (_message.IndexOf('}') - _message.IndexOf(','))); 
+            CritterLocation = new Point(int.Parse(holder[0]));
+            CritterLocation = new Point(int.Parse(holder[1]));
         }
-
     }
 
 
