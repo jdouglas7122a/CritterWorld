@@ -1,4 +1,4 @@
-﻿using CritterController;
+﻿
 using System;
 using System.Drawing;
 using System.IO;
@@ -25,24 +25,35 @@ namespace _100476935
             Boolean[] PointConditions = new Boolean[4] { false, false, false, false };
             int[] count = new int[2] { 0, mapWidth * mapHeight };
 
-            for (int i = 0; i != mapWidth; i++)
+            for (int i = 0; i != mapWidth + 1; i++)
             {
-                for (int i2 = 0; i2 != mapHeight; i2++)
+                for (int i2 = 0; i2 != mapHeight + 1; i2++)
                 {
                     compasV2MapInfo.Add(PointToString(new Point(i, i2)), new List<Boolean>());
                     compasV2MapInfo[PointToString(new Point(i, i2))].AddRange(PointConditions);
                 }
             }
 
-            for(int i = 0; i != mapWidth; i++)
+            for (int i = 0; i != mapWidth; i++)
             {
-                compasV2MapInfo[PointToString(new Point(i,0))][0] = true;
-                compasV2MapInfo[PointToString(new Point(i,0))][3] = true;
+                compasV2MapInfo[PointToString(new Point(i, 0))][0] = true;
+                compasV2MapInfo[PointToString(new Point(i, 0))][3] = true;
+            }
+            for (int i = 0; i != mapWidth; i++)
+            {
+
+                compasV2MapInfo[PointToString(new Point(i, mapHeight))][0] = true;
+                compasV2MapInfo[PointToString(new Point(i, mapHeight))][3] = true;
             }
             for (int i = 0; i != mapHeight; i++)
             {
-                compasV2MapInfo[PointToString(new Point(0,i))][0] = true;
-                compasV2MapInfo[PointToString(new Point(0,i))][3] = true;
+                compasV2MapInfo[PointToString(new Point(0, i))][0] = true;
+                compasV2MapInfo[PointToString(new Point(0, i))][3] = true;
+            }
+            for (int i = 0; i != mapHeight; i++)
+            {
+                compasV2MapInfo[PointToString(new Point(mapWidth, i))][0] = true;
+                compasV2MapInfo[PointToString(new Point(mapWidth, i))][3] = true;
             }
 
         }
@@ -99,24 +110,14 @@ namespace _100476935
             return result;
         }
 
-        public void UpdateCritterLocation(string _message)  
+        public void UpdateCritterLocation(string _message)
         {
-            _message = _message.Substring(_message.IndexOf("2082") + 8); 
-            string[] holder = new string[2];
-            holder[0] = _message.Substring(0,_message.IndexOf(',')); 
-            holder[1] = _message.Substring(_message.IndexOf(','), (_message.IndexOf('}') - _message.IndexOf(','))); 
-            CritterLocation = new Point(int.Parse(holder[0]));
-            CritterLocation = new Point(int.Parse(holder[1]));
+            _message = _message.Substring(_message.IndexOf("2082") + 8);
+            string holder = "";
+            holder = _message.Substring(0, _message.IndexOf(','));
+            int num = (_message.IndexOf('}')) - (_message.IndexOf(',') + 3);
+            _message = _message.Substring(_message.IndexOf(',') + 3, num);
+            CritterLocation = new Point(int.Parse(holder), int.Parse(_message));
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

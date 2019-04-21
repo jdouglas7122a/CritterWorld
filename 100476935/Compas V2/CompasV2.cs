@@ -140,7 +140,6 @@ namespace _100476935
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:2082");
                     break;
-
                 case "ERROR":
                     break;
             }

@@ -10,7 +10,7 @@ namespace _100476935
     public class CompasV2Movment
     {
 
-        string returnValue = "SET_DESTINATIOON:";
+        string returnValue = "SET_DESTINATION:";
 
         public string MoveCritter(CompasV2Map _map)
         {
@@ -68,38 +68,4 @@ namespace _100476935
             return returnValue;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
