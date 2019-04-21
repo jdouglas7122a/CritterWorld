@@ -120,7 +120,7 @@ namespace _100476935
                     Responder("GET_ARENA_SIZE:2082");
                     break;
                 case "ARENA_SIZE":
-                    
+                    map = new CompasV2Map(message);
                         break;
                     
 
