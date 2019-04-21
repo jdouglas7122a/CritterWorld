@@ -13,13 +13,13 @@ namespace _100476935
         public int mapHeight;
         public Point CritterLocation;
         public Point Goal;
-        Dictionary<string, List<Boolean>> compasV2MapInfo = new Dictionary<string, List<Boolean>>();
+        public Dictionary<string, List<Boolean>> compasV2MapInfo = new Dictionary<string, List<Boolean>>();
         // avoid, food, escape, evaluated
 
-        public CompasV2Map(string message)
+        public CompasV2Map(string _message)
         {
-            message = message.Substring(message.IndexOf("2082") + 5);
-            string[] holder = message.Split(':');
+            _message = _message.Substring(_message.IndexOf("2082") + 5);
+            string[] holder = _message.Split(':');
             mapWidth = int.Parse(holder[0]);
             mapHeight = int.Parse(holder[1]);
             Boolean[] PointConditions = new Boolean[4] { false, false, false, false };
@@ -34,9 +34,20 @@ namespace _100476935
                 }
             }
 
+            for(int i = 0; i != mapWidth; i++)
+            {
+                compasV2MapInfo[PointToString(new Point(i,0))][0] = true;
+                compasV2MapInfo[PointToString(new Point(i,0))][3] = true;
+            }
+            for (int i = 0; i != mapHeight; i++)
+            {
+                compasV2MapInfo[PointToString(new Point(0,i))][0] = true;
+                compasV2MapInfo[PointToString(new Point(0,i))][3] = true;
+            }
+
         }
 
-        public void UpdatePoint(string _message)
+        public void UpdateMap(string _message)
         {
             string[] holder = _message.Split('\t');
             Point target;
@@ -48,6 +59,7 @@ namespace _100476935
                     target = GeneratePoint(messageSegment);
                     compasV2MapInfo[PointToString(target)][2] = true;
                     compasV2MapInfo[PointToString(target)][3] = true;
+                    Goal = target;
                 }
                 else if (messageSegment.Contains("Bomb"))
                 {
@@ -85,6 +97,12 @@ namespace _100476935
             result = point.X.ToString() + ":" + point.Y.ToString();
 
             return result;
+        }
+
+        public void UpdateCritterLocation(string _message)
+        {
+
+
         }
 
     }

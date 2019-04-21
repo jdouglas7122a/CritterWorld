@@ -7,6 +7,7 @@ namespace _100476935
 {
     public class CompasV2 : ICritterController
     {
+        public CompasV2Movment move;
 
         public CompasV2Map map;
     
@@ -121,15 +122,25 @@ namespace _100476935
                     break;
                 case "ARENA_SIZE":
                     map = new CompasV2Map(message);
-                        break;
-                    
-
-
+                    Responder("SCAN:2082");
+                    break;
                 case "SCAN":
+                    map.UpdateMap(message);
+                    Responder("GET_LOCATION:2082");
+                    break;
+
+                case "LOCATION":
+                    map.UpdateCritterLocation(message);
+                    Responder("SEE:2082");
+                    break;
+                case "SEE":
+                    map.UpdateMap(message);
+                    Responder(move.MoveCritter(map) + ":5");
                     break;
                 case "REACHED_DESTINATION":
-                case "SEE":
+                    Responder("GET_LOCATION:2082");
                     break;
+
                 case "ERROR":
                     break;
             }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compas V2\CompasV2Moving.cs" />
     <Compile Include="Compas V2\CompasV2.cs" />
     <Compile Include="Compas V2\CompasV2Mapping.cs" />
     <Compile Include="Compas V2\CompasV2Settings.cs">

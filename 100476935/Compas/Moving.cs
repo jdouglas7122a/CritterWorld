@@ -48,7 +48,7 @@ namespace _100476935
                     {
                         tester = new Point(_location.X, _location.Y + indexIdentifier[index1, 1]);
                     }
-                    if (MapPoints[tester])//if the point targeted is no entry
+                    if (MapPoints[tester])//if the point targeted is no entry------
                     {
                         canGo = false;
                         if (indexIdentifier[index1, 0] == 0)
