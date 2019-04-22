@@ -52,6 +52,7 @@
     <Compile Include="Compas V2\CompasV2Settings.Designer.cs">
       <DependentUpon>CompasV2Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compas V3\CompasV3Mapping.cs" />
     <Compile Include="Compas V3\CompasV3.cs" />
     <Compile Include="Compas V3\CompasV3 Settings.cs">
       <SubType>Form</SubType>

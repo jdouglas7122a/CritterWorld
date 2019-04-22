@@ -103,23 +103,19 @@ namespace _100476935
             switch (notification)
             {
                 case "LAUNCH":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\lastPoint.txt", "start nsg");
                     LoadSettings();
                     Responder("GET_ARENA_SIZE:2082");
                     break;//doesnt crash
                 case "ARENA_SIZE":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\lastPoint.txt", "arena size msg");
                     map = new CompasV2Map(message);
                     Responder("SCAN:2082");
                     break; // doesnt crash
                 case "SCAN":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\lastPoint.txt", "scan msg");
                     map.UpdateMap(message);
                     Responder("GET_LOCATION:2082");
                     break;//doesnt crash
 
                 case "LOCATION":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\lastPoint.txt", "location msg");
                     map.UpdateCritterLocation(message);
                     Responder("SEE:2082");
                     break; //doesnt crash
@@ -135,7 +131,6 @@ namespace _100476935
                     */
                     
                 case "CRASHED":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\crashed.txt", message);
                     break;
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:2082");
