@@ -51,6 +51,11 @@ namespace _100476935
                             results.Add(new Point(testLocation.X, testLocation.Y - (10 * movementInfo[index, 2])));
                         }
                     }
+                    else if (movementInfo[index, 1] >= 50)
+                    {
+                        goFurther = false;
+                        results.Add(testLocation);
+                    }
                 }
             }
             results.ForEach(result => //is result on axis with goal 

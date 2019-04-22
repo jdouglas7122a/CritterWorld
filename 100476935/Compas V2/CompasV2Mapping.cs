@@ -65,6 +65,8 @@ namespace _100476935
             Point target;
             holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
 
+
+
             Array.ForEach(holder, messageSegment =>
             {
                 if (messageSegment.Contains("EscapeHatch"))
