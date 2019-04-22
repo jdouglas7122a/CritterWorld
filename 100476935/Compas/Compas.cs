@@ -135,25 +135,7 @@ namespace _100476935
                     map.CreateMap();
                     Responder("GET_LOCATION:2081");
                     break;
-                case "LOCATION":
-                    map.UpdateCritterLocation(message);
-                    break;
-                case "SCAN":
-                    map.UpdateMap(message);
-                    Responder("SEE:2081");
-                    break;
-                case "SEE":
-                    map.UpdateMap(message);
-                    Responder(movment.MoveCritter(map.critterLocation, map));
-                    break;
-
-                case "SHUTDOWN":
-                    break;
-                case "REACHED_DESTINATION":
-                    Responder(movment.MoveCritter(map.critterLocation, map));
-                    break;
-                case "LEVEL_TIME_REMAINING":
-                    break;
+               
                 case "ERROR":
                     Log(message);
                     break;

@@ -9,7 +9,7 @@ namespace _100476935
 {
     class ControllerFactory : ICritterControllerFactory
     {
-        public string Author => "100476935";
+        public string Author => "Josh Douglas 100476935";
 
         public ICritterController[] GetCritterControllers()
         {

@@ -1,4 +1,5 @@
 ﻿
+using CritterController;
 using System;
 using System.Drawing;
 using System.IO;
@@ -62,6 +63,7 @@ namespace _100476935
         {
             string[] holder = _message.Split('\t');
             Point target;
+            holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
 
             Array.ForEach(holder, messageSegment =>
             {

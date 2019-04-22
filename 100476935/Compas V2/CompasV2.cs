@@ -119,29 +119,32 @@ namespace _100476935
                 case "LAUNCH":
                     LoadSettings();
                     Responder("GET_ARENA_SIZE:2082");
-                    break;
+                    break;//doesnt crash
                 case "ARENA_SIZE":
                     map = new CompasV2Map(message);
                     Responder("SCAN:2082");
-                    break;
+                    break; // doesnt crash
                 case "SCAN":
                     map.UpdateMap(message);
                     Responder("GET_LOCATION:2082");
-                    break;
-
+                    break;//doesnt crash
                 case "LOCATION":
                     map.UpdateCritterLocation(message);
                     Responder("SEE:2082");
-                    break;
+                    break; //doesnt crash
                 case "SEE":
-                    map.UpdateMap(message);
+                    map.UpdateMap(message); //crash
                     Responder(move.MoveCritter(map) + ":5");
                     break;
-                case "REACHED_DESTINATION":
+
+             /*   case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:2082");
                     break;
+
                 case "ERROR":
-                    break;
+                    break; */
+
+
             }
         }
     }
