@@ -7,9 +7,9 @@ namespace _100476935
 {
     public class CompasV2 : ICritterController
     {
-        public CompasV2Movment move;
+        public CompasV2Movment move = new CompasV2Movment();
 
-        public CompasV2Map map;
+        public CompasV2Map map = new CompasV2Map();
     
         public string Name { get; set; }
 
@@ -23,16 +23,6 @@ namespace _100476935
 
         public int HeadForExitSpeed { get; set; } = 5;
 
-        private static Point PointFrom(string coordinate)
-        {
-            string[] coordinateParts = coordinate.Substring(1, coordinate.Length - 2).Split(',');
-            string rawX = coordinateParts[0].Substring(2);
-            string rawY = coordinateParts[1].Substring(2);
-            int x = int.Parse(rawX);
-            int y = int.Parse(rawY);
-            return new Point(x, y);
-        }
-
         private void Log(string message)
         {
             if (Logger == null)
@@ -45,10 +35,6 @@ namespace _100476935
             }
         }
 
-        private void SetDestination(Point coordinate, int speed)
-        {
-            Responder("SET_DESTINATION:" + coordinate.X + ":" + coordinate.Y + ":" + speed);
-        }
 
         private void LoadSettings()
         {
@@ -117,32 +103,45 @@ namespace _100476935
             switch (notification)
             {
                 case "LAUNCH":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\lastPoint.txt", "start nsg");
                     LoadSettings();
                     Responder("GET_ARENA_SIZE:2082");
                     break;//doesnt crash
                 case "ARENA_SIZE":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\lastPoint.txt", "arena size msg");
                     map = new CompasV2Map(message);
                     Responder("SCAN:2082");
                     break; // doesnt crash
                 case "SCAN":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\lastPoint.txt", "scan msg");
                     map.UpdateMap(message);
                     Responder("GET_LOCATION:2082");
                     break;//doesnt crash
+
                 case "LOCATION":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\lastPoint.txt", "location msg");
                     map.UpdateCritterLocation(message);
                     Responder("SEE:2082");
                     break; //doesnt crash
+
+                    /* quarantine zone
+
+
                 case "SEE":
-                    map.UpdateMap(message); //crash
-                    Responder(move.MoveCritter(map) + ":5");
+                    map.UpdateMap(message); //doesnt crash
+                    Responder(move.MoveCritter(map) + ":5"); //crash
                     break;
 
-             /*   case "REACHED_DESTINATION":
+                    */
+                    
+                case "CRASHED":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\crashed.txt", message);
+                    break;
+                case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:2082");
                     break;
-
                 case "ERROR":
-                    break; */
+                    break; 
 
 
             }

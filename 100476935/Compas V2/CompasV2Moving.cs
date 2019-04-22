@@ -9,6 +9,10 @@ namespace _100476935
 {
     public class CompasV2Movment
     {
+        public CompasV2Movment()
+        {
+
+        }
 
         string returnValue = "SET_DESTINATION:";
 
@@ -36,7 +40,9 @@ namespace _100476935
                     else if (movementInfo[index, 0] == 1) // if it targets Y
                     {
                         testLocation = new Point(_map.CritterLocation.X, _map.CritterLocation.Y + movementInfo[index, 1]);
-                    }
+                    }   
+
+
 
                     if (_map.compasV2MapInfo[_map.PointToString(testLocation)][0]) //checks the location dictionary to see if the tester location is to be avoided
                     {

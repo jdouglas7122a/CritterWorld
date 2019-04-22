@@ -52,6 +52,13 @@
     <Compile Include="Compas V2\CompasV2Settings.Designer.cs">
       <DependentUpon>CompasV2Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compas V3\CompasV3.cs" />
+    <Compile Include="Compas V3\CompasV3 Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compas V3\CompasV3 Settings.Designer.cs">
+      <DependentUpon>CompasV3 Settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compas\Compas.cs" />
     <Compile Include="Compas\CompasSettings.cs">
       <SubType>Form</SubType>
@@ -68,6 +75,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Compas V2\CompasV2Settings.resx">
       <DependentUpon>CompasV2Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compas V3\CompasV3 Settings.resx">
+      <DependentUpon>CompasV3 Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compas\CompasSettings.resx">
       <DependentUpon>CompasSettings.cs</DependentUpon>

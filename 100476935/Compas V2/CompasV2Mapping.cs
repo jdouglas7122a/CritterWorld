@@ -12,11 +12,16 @@ namespace _100476935
     {
         public int mapWidth;
         public int mapHeight;
-        public Point CritterLocation;
-        public Point Goal;
+        public Point CritterLocation = new Point(0,0);
+        public Point Goal = new Point (0,0);
         public Dictionary<string, List<Boolean>> compasV2MapInfo = new Dictionary<string, List<Boolean>>();
         // avoid, food, escape, evaluated
 
+        public CompasV2Map()
+        {
+
+        }
+    
         public CompasV2Map(string _message)
         {
             _message = _message.Substring(_message.IndexOf("2082") + 5);
@@ -30,8 +35,7 @@ namespace _100476935
             {
                 for (int i2 = 0; i2 != mapHeight + 1; i2++)
                 {
-                    compasV2MapInfo.Add(PointToString(new Point(i, i2)), new List<Boolean>());
-                    compasV2MapInfo[PointToString(new Point(i, i2))].AddRange(PointConditions);
+                    compasV2MapInfo.Add(PointToString(new Point(i, i2)), new List<Boolean>(PointConditions));
                 }
             }
 
@@ -62,11 +66,8 @@ namespace _100476935
         public void UpdateMap(string _message)
         {
             string[] holder = _message.Split('\t');
-            Point target;
+            Point target = new Point(0, 0);
             holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
-
-
-
             Array.ForEach(holder, messageSegment =>
             {
                 if (messageSegment.Contains("EscapeHatch"))
