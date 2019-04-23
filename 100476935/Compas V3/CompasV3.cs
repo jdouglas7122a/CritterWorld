@@ -139,6 +139,7 @@ namespace _100476935
                     Responder("GET_LOCATION:3");
                     break;
                 case "LOCATION":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt",actionCounter.ToString());
                     map.UpdateCritterLocation(message);
                     Responder(move.MoveCritter(map) + ":" +EatSpeed);
                     break;

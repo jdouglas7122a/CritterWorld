@@ -11,13 +11,12 @@ namespace _100476935
     {
         public CompasV3Movment()
         {
-
+            
         }
-
-        string returnValue = "SET_DESTINATION:";
 
         public string MoveCritter(CompasV3Map _map)
         {
+            string returnValue = "SET_DESTINATION:";
             Random rand = new Random();
             Boolean goFurther = false;
             Point testLocation = new Point(0,0);
@@ -40,27 +39,33 @@ namespace _100476935
                     else if (movementInfo[index, 0] == 1) // if it targets Y
                     {
                         testLocation = new Point(_map.CritterLocation.X, _map.CritterLocation.Y + movementInfo[index, 1]);
-                    }   
+                    }
 
 
-
-                    if (_map.compasV3MapInfo[_map.PointToString(testLocation)][0]) //checks the location dictionary to see if the tester location is to be avoided
+                    if (testLocation.X > 0 && testLocation.Y > 0)
                     {
-                        goFurther = false;
+                        if (_map.compasV3MapInfo[_map.PointToString(testLocation)][0]) //checks the location dictionary to see if the tester location is to be avoided
+                        {
+                            goFurther = false;
 
-                        if(movementInfo[index, 0] == 0)
-                        {
-                            results.Add(new Point(testLocation.X - (5 * movementInfo[index, 2]), testLocation.Y));
+                            if (movementInfo[index, 0] == 0)
+                            {
+                                results.Add(new Point(testLocation.X - (5 * movementInfo[index, 2]), testLocation.Y));
+                            }
+                            else if (movementInfo[index, 0] == 1)
+                            {
+                                results.Add(new Point(testLocation.X, testLocation.Y - (5 * movementInfo[index, 2])));
+                            }
                         }
-                        else if(movementInfo[index, 0] == 1)
+                        else if (movementInfo[index, 1] >= 50)
                         {
-                            results.Add(new Point(testLocation.X, testLocation.Y - (5 * movementInfo[index, 2])));
+                            goFurther = false;
+                            results.Add(testLocation);
                         }
                     }
-                    else if (movementInfo[index, 1] >= 50)
+                    else
                     {
                         goFurther = false;
-                        results.Add(testLocation);
                     }
                 }
             }
@@ -73,7 +78,7 @@ namespace _100476935
             });
             if (returnValue == "SET_DESTINATION:") // is return value still empty
             {
-                Point holder = results[rand.Next(3)];
+                Point holder = results[rand.Next(4)];
                 returnValue += holder.X + ":" + holder.Y;
             }
             return returnValue;

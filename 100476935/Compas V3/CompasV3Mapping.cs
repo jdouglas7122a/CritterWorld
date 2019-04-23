@@ -65,37 +65,42 @@ namespace _100476935
 
         public void UpdateMap(string _message)
         {
+
             string[] holder = _message.Split('\t');
             Point target = new Point(0, 0);
-            holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
-            Array.ForEach(holder, messageSegment =>
+            if (holder[0] == "SEE:Nothing")
             {
-                if (messageSegment.Contains("EscapeHatch"))
+                System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", "crash message: " + _message);
+                holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
+                Array.ForEach(holder, messageSegment =>
                 {
-                    target = GeneratePoint(messageSegment);
-                    compasV3MapInfo[PointToString(target)][2] = true;
-                    compasV3MapInfo[PointToString(target)][3] = true;
-                    Goal = target;
-                }
-                else if (messageSegment.Contains("Bomb"))
-                {
-                    target = GeneratePoint(messageSegment);
-                    compasV3MapInfo[PointToString(target)][0] = true;
-                    compasV3MapInfo[PointToString(target)][3] = true;
-                }
-                else if (messageSegment.Contains("Terrain"))
-                {
-                    target = GeneratePoint(messageSegment);
-                    compasV3MapInfo[PointToString(target)][0] = true;
-                    compasV3MapInfo[PointToString(target)][3] = true;
-                }
-                else if (messageSegment.Contains("Food"))
-                {
-                    target = GeneratePoint(messageSegment);
-                    compasV3MapInfo[PointToString(target)][1] = true;
-                    compasV3MapInfo[PointToString(target)][3] = true;
-                }
-            });
+                    if (messageSegment.Contains("EscapeHatch"))
+                    {
+                        target = GeneratePoint(messageSegment);
+                        compasV3MapInfo[PointToString(target)][2] = true;
+                        compasV3MapInfo[PointToString(target)][3] = true;
+                        Goal = target;
+                    }
+                    else if (messageSegment.Contains("Bomb"))
+                    {
+                        target = GeneratePoint(messageSegment);
+                        compasV3MapInfo[PointToString(target)][0] = true;
+                        compasV3MapInfo[PointToString(target)][3] = true;
+                    }
+                    else if (messageSegment.Contains("Terrain"))
+                    {
+                        target = GeneratePoint(messageSegment);
+                        compasV3MapInfo[PointToString(target)][0] = true;
+                        compasV3MapInfo[PointToString(target)][3] = true;
+                    }
+                    else if (messageSegment.Contains("Food"))
+                    {
+                        target = GeneratePoint(messageSegment);
+                        compasV3MapInfo[PointToString(target)][1] = true;
+                        compasV3MapInfo[PointToString(target)][3] = true;
+                    }
+                });
+            }
         }
 
         public Point GeneratePoint(string _message)
