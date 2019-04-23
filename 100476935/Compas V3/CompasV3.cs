@@ -28,6 +28,8 @@ namespace _100476935
 
         public CompasV3Map map = new CompasV3Map();
 
+        public CompasV3Movment move = new CompasV3Movment();
+
         private void Log(string message)
         {
             if (Logger == null)
@@ -108,7 +110,7 @@ namespace _100476935
             {
                 case "LAUNCH":
                     arenaInitialized = false;
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Start");
+                    //System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Start");
                     LoadSettings();
                     Responder("STOP");
                     Responder("GET_ARENA_SIZE:1");
@@ -137,8 +139,14 @@ namespace _100476935
                     Responder("GET_LOCATION:3");
                     break;
                 case "LOCATION":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Location");
                     map.UpdateCritterLocation(message);
+                    Responder(move.MoveCritter(map) + ":" +EatSpeed);
+                    break;
+
+                case "REACHED_DESTINATION":
+                    Responder("GET_LOCATION:3");
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Reached");
+
                     break;
                 
 

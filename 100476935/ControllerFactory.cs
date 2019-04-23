@@ -15,8 +15,6 @@ namespace _100476935
         {
             List<ICritterController> controllers = new List<ICritterController>();
 
-            controllers.Add(new Compas("CompasV1_" + (1)));
-            controllers.Add(new CompasV2("CompasV2_" + 1));
             controllers.Add(new CompasV3("CompasV3_" + 1));
 
             for (int i = 0; i < 22; i++)

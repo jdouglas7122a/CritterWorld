@@ -7,16 +7,16 @@ using System.Collections.Generic;
 
 namespace _100476935
 {
-    public class CompasV2Movment
+    public class CompasV3Movment
     {
-        public CompasV2Movment()
+        public CompasV3Movment()
         {
 
         }
 
         string returnValue = "SET_DESTINATION:";
 
-        public string MoveCritter(CompasV2Map _map)
+        public string MoveCritter(CompasV3Map _map)
         {
             Random rand = new Random();
             Boolean goFurther = false;
@@ -44,17 +44,17 @@ namespace _100476935
 
 
 
-                    if (_map.compasV2MapInfo[_map.PointToString(testLocation)][0]) //checks the location dictionary to see if the tester location is to be avoided
+                    if (_map.compasV3MapInfo[_map.PointToString(testLocation)][0]) //checks the location dictionary to see if the tester location is to be avoided
                     {
                         goFurther = false;
 
                         if(movementInfo[index, 0] == 0)
                         {
-                            results.Add(new Point(testLocation.X - (10 * movementInfo[index, 2]), testLocation.Y));
+                            results.Add(new Point(testLocation.X - (5 * movementInfo[index, 2]), testLocation.Y));
                         }
                         else if(movementInfo[index, 0] == 1)
                         {
-                            results.Add(new Point(testLocation.X, testLocation.Y - (10 * movementInfo[index, 2])));
+                            results.Add(new Point(testLocation.X, testLocation.Y - (5 * movementInfo[index, 2])));
                         }
                     }
                     else if (movementInfo[index, 1] >= 50)

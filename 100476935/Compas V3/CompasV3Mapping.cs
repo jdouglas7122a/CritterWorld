@@ -70,7 +70,6 @@ namespace _100476935
             holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
             Array.ForEach(holder, messageSegment =>
             {
-                System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CrashTarget.txt","Target location: " +  messageSegment + " in map: Width: " + mapWidth + ", Height: " + mapHeight);
                 if (messageSegment.Contains("EscapeHatch"))
                 {
                     target = GeneratePoint(messageSegment);
