@@ -7,6 +7,7 @@ namespace _100476935
 {
     public class CompasV3 : ICritterController
     {
+
         Point goal = new Point(-1, -1);
 
         System.Timers.Timer getInfoTimer;
@@ -22,6 +23,8 @@ namespace _100476935
         public int EatSpeed { get; set; } = 5;
 
         public int HeadForExitSpeed { get; set; } = 5;
+
+        public bool arenaInitialized = false;
 
         public CompasV3Map map = new CompasV3Map();
 
@@ -104,28 +107,45 @@ namespace _100476935
             switch (notification)
             {
                 case "LAUNCH":
+                    arenaInitialized = false;
                     System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Start");
                     LoadSettings();
                     Responder("STOP");
                     Responder("GET_ARENA_SIZE:1");
                     break;
-                case "ARENA_SIZE":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Arena Size");
-                    map = new CompasV3Map(message);
-                    Responder("GET_LOCATION:2");
-                    break;
-                case "LOCATION":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Location");
-                    map.UpdateCritterLocation(message);
-                    Responder("SCAN:3");
-                    break;
-                case "SCAN":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Location");
-                    map.UpdateMap(message); // crash
+                case "SEE":
+                    if (arenaInitialized)
+                    {
+                        map.UpdateMap(message);
+                    }
                     break;
                 case "CRASHED":
                     System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\crashReport.txt", message);
                     break;
+
+
+
+                case "ARENA_SIZE":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Arena Size");
+                    map = new CompasV3Map(message);
+                    arenaInitialized = true;
+                    Responder("SCAN:2");
+                    break;
+                case "SCAN":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Scan");
+                    map.UpdateMap(message);
+                    Responder("GET_LOCATION:3");
+                    break;
+                case "LOCATION":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Location");
+                    map.UpdateCritterLocation(message);
+                    break;
+                
+
+
+
+
+
             }
         }
     }

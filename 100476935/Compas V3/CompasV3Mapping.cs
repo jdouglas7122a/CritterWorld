@@ -24,7 +24,7 @@ namespace _100476935
     
         public CompasV3Map(string _message)
         {
-            _message = _message.Substring(_message.IndexOf("1") + 5);
+            _message = _message.Substring(_message.IndexOf('1') + 2);
             string[] holder = _message.Split(':');
             mapWidth = int.Parse(holder[0]);
             mapHeight = int.Parse(holder[1]);
@@ -70,6 +70,7 @@ namespace _100476935
             holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
             Array.ForEach(holder, messageSegment =>
             {
+                System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CrashTarget.txt","Target location: " +  messageSegment + " in map: Width: " + mapWidth + ", Height: " + mapHeight);
                 if (messageSegment.Contains("EscapeHatch"))
                 {
                     target = GeneratePoint(messageSegment);
@@ -117,7 +118,7 @@ namespace _100476935
 
         public void UpdateCritterLocation(string _message)
         {
-            _message = _message.Substring(_message.IndexOf("2082") + 8);
+            _message = _message.Substring(_message.IndexOf("3") + 5);
             string holder = "";
             holder = _message.Substring(0, _message.IndexOf(','));
             int num = (_message.IndexOf('}')) - (_message.IndexOf(',') + 3);
