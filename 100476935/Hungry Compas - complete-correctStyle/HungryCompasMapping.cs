@@ -20,7 +20,6 @@ namespace _100476935
 
         public HungryCompasMap()
         {
-
         }
     
         public HungryCompasMap(string _message)
@@ -48,7 +47,6 @@ namespace _100476935
             }
             for (int i = 0; i != mapWidth; i++)
             {
-
                 HungryCompasMapInfo[PointToString(new Point(i, mapHeight))][0] = true;
                 HungryCompasMapInfo[PointToString(new Point(i, mapHeight))][3] = true;
             }
@@ -67,9 +65,9 @@ namespace _100476935
 
         public void UpdateMap(string _message)
         {
-
             string[] holder = _message.Split('\t');
             Point target = new Point(0, 0);
+
             if (!holder[0].Contains("Nothing"))
             {
                 holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
@@ -82,7 +80,6 @@ namespace _100476935
                         HungryCompasMapInfo[PointToString(target)][3] = true;
                         Goal = target;
                     }
-
                     if (messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
@@ -94,19 +91,15 @@ namespace _100476935
                             {
                                 HungryCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][2] = true;
                                 HungryCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][3] = true;
-
                             }
                         }
-
                     }
-
                     else if (messageSegment.Contains("Bomb") || messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
                         HungryCompasMapInfo[PointToString(target)][0] = true;
                         HungryCompasMapInfo[PointToString(target)][3] = true;
                     }
-                  
                 });
             }
         }

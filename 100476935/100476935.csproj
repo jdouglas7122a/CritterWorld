@@ -52,22 +52,22 @@
     <Compile Include="Popcorn Compas\ScaredCompasSettings.Designer.cs">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Scared Compas\ScaredCompas.cs" />
-    <Compile Include="Scared Compas\ScaredCompasMapping.cs" />
-    <Compile Include="Scared Compas\ScaredCompasMovment.cs" />
-    <Compile Include="Scared Compas\ScaredCompasSettings.cs">
+    <Compile Include="Scared Compas - correct style\ScaredCompas.cs" />
+    <Compile Include="Scared Compas - correct style\ScaredCompasMapping.cs" />
+    <Compile Include="Scared Compas - correct style\ScaredCompasMovment.cs" />
+    <Compile Include="Scared Compas - correct style\ScaredCompasSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Scared Compas\ScaredCompasSettings.Designer.cs">
+    <Compile Include="Scared Compas - correct style\ScaredCompasSettings.Designer.cs">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hungry Compas - complete\HungryCompasMoving.cs" />
-    <Compile Include="Hungry Compas - complete\HungryCompasMapping.cs" />
-    <Compile Include="Hungry Compas - complete\HungryCompas.cs" />
-    <Compile Include="Hungry Compas - complete\HungryCompasSettings.cs">
+    <Compile Include="Hungry Compas - complete-correctStyle\HungryCompasMoving.cs" />
+    <Compile Include="Hungry Compas - complete-correctStyle\HungryCompasMapping.cs" />
+    <Compile Include="Hungry Compas - complete-correctStyle\HungryCompas.cs" />
+    <Compile Include="Hungry Compas - complete-correctStyle\HungryCompasSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Hungry Compas - complete\HungryCompasSettings.Designer.cs">
+    <Compile Include="Hungry Compas - complete-correctStyle\HungryCompasSettings.Designer.cs">
       <DependentUpon>HungryCompasSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="ControllerFactory.cs" />
@@ -78,10 +78,10 @@
     <EmbeddedResource Include="Popcorn Compas\ScaredCompasSettings.resx">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scared Compas\ScaredCompasSettings.resx">
+    <EmbeddedResource Include="Scared Compas - correct style\ScaredCompasSettings.resx">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Hungry Compas - complete\HungryCompasSettings.resx">
+    <EmbeddedResource Include="Hungry Compas - complete-correctStyle\HungryCompasSettings.resx">
       <DependentUpon>HungryCompasSettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

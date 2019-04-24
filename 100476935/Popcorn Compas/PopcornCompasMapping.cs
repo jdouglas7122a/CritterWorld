@@ -20,7 +20,6 @@ namespace _100476935
 
         public PopcornCompasMap()
         {
-
         }
     
         public PopcornCompasMap(string _message)

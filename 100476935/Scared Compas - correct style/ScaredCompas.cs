@@ -121,7 +121,6 @@ namespace _100476935
                     }
                     break;
                 case "CRASHED":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", message);
                     break;
                 case "ARENA_SIZE":
                     map = new ScaredCompasMap(message);
@@ -136,19 +135,12 @@ namespace _100476935
                     map.UpdateCritterLocation(message);
                     Responder(move.MoveCritter(map) + ":" +EatSpeed);
                     break;
-
                 case "BUMP":
                     Responder("RANDOM_DESTINATION");
                     break;
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:3");
                     break;
-                
-
-
-
-
-
             }
         }
     }

@@ -121,7 +121,6 @@ namespace _100476935
                     }
                     break;
                 case "CRASHED":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", message);
                     break;
                 case "ARENA_SIZE":
                     map = new PopcornCompasMap(message);

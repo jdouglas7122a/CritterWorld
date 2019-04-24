@@ -40,7 +40,6 @@ namespace _100476935
                     ScaredCompasMapInfo.Add(PointToString(new Point(i, i2)), new List<Boolean>(PointConditions));
                 }
             }
-
             for (int i = 0; i != mapWidth; i++)
             {
                 ScaredCompasMapInfo[PointToString(new Point(i, 0))][0] = true;
@@ -48,7 +47,6 @@ namespace _100476935
             }
             for (int i = 0; i != mapWidth; i++)
             {
-
                 ScaredCompasMapInfo[PointToString(new Point(i, mapHeight))][0] = true;
                 ScaredCompasMapInfo[PointToString(new Point(i, mapHeight))][3] = true;
             }
@@ -62,14 +60,13 @@ namespace _100476935
                 ScaredCompasMapInfo[PointToString(new Point(mapWidth, i))][0] = true;
                 ScaredCompasMapInfo[PointToString(new Point(mapWidth, i))][3] = true;
             }
-
         }
 
         public void UpdateMap(string _message)
         {
-
             string[] holder = _message.Split('\t');
             Point target = new Point(0, 0);
+
             if (!holder[0].Contains("Nothing"))
             {
                 holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
@@ -82,7 +79,6 @@ namespace _100476935
                         ScaredCompasMapInfo[PointToString(target)][3] = true;
                         Goal = target;
                     }
-
                     if (messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
@@ -94,12 +90,9 @@ namespace _100476935
                             {
                                 ScaredCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][2] = true;
                                 ScaredCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][3] = true;
-
                             }
                         }
-
                     }
-
                     else if (messageSegment.Contains("Bomb") || messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
@@ -124,7 +117,6 @@ namespace _100476935
 
             return new Point(int.Parse(location1), int.Parse(location2));
         }
-
         public String PointToString(Point point)
         {
             string result = "";
