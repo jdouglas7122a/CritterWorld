@@ -61,13 +61,13 @@
     <Compile Include="Scared Compas\ScaredCompasSettings.Designer.cs">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hungry Compas\HungryCompasMoving.cs" />
-    <Compile Include="Hungry Compas\HungryCompasMapping.cs" />
-    <Compile Include="Hungry Compas\HungryCompas.cs" />
-    <Compile Include="Hungry Compas\HungryCompasSettings.cs">
+    <Compile Include="Hungry Compas - complete\HungryCompasMoving.cs" />
+    <Compile Include="Hungry Compas - complete\HungryCompasMapping.cs" />
+    <Compile Include="Hungry Compas - complete\HungryCompas.cs" />
+    <Compile Include="Hungry Compas - complete\HungryCompasSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Hungry Compas\HungryCompasSettings.Designer.cs">
+    <Compile Include="Hungry Compas - complete\HungryCompasSettings.Designer.cs">
       <DependentUpon>HungryCompasSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="ControllerFactory.cs" />
@@ -81,7 +81,7 @@
     <EmbeddedResource Include="Scared Compas\ScaredCompasSettings.resx">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Hungry Compas\HungryCompasSettings.resx">
+    <EmbeddedResource Include="Hungry Compas - complete\HungryCompasSettings.resx">
       <DependentUpon>HungryCompasSettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

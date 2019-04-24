@@ -10,7 +10,7 @@ namespace _100476935
 {
     public class HungryCompasMovment
     {
-        private List<List<Point>> results = new List<List<Point>>(); // goal, goal axis , objective, avoid
+        private List<List<Point>> results = new List<List<Point>>(); // food, avoid
 
         public HungryCompasMovment()
         {
@@ -40,27 +40,25 @@ namespace _100476935
             {
 
                 goFurther = true;
-                while (goFurther) // while the line has not come into contact with obstruction
+                while (goFurther) 
                 {
                     movementInfo[index, 1] += movementInfo[index, 2]; //increment of decrement the disance the line has traveled
-                    if (movementInfo[index, 0] == 0) // if it targets X
+                    if (movementInfo[index, 0] == 0) 
                     {
-                        testLocation = new Point(_map.CritterLocation.X + movementInfo[index, 1], _map.CritterLocation.Y); // x -1, y
+                        testLocation = new Point(_map.CritterLocation.X + movementInfo[index, 1], _map.CritterLocation.Y); 
                     }
-                    else if (movementInfo[index, 0] == 1) // if it targets Y
+                    else if (movementInfo[index, 0] == 1) 
                     {
                         testLocation = new Point(_map.CritterLocation.X, _map.CritterLocation.Y + movementInfo[index, 1]);
                     }
 
 
-                    goFurther = CheckForAvoid(_map, testLocation, movementInfo, index); // checks what the 
+                    goFurther = CheckForAvoid(_map, testLocation, movementInfo, index); 
 
 
                     if (goFurther == true)
                     {
-                        CheckForExit(_map, testLocation, movementInfo, index);
-                        CheckForExitAxis(_map, testLocation, movementInfo, index);
-                        CheckForObjective(_map, testLocation, movementInfo, index);
+                        CheckForFood(_map, testLocation, movementInfo, index);
                     }
 
                 }
@@ -71,20 +69,30 @@ namespace _100476935
             return resultSelection(rand, _map);
         }
 
-        //---------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-
-
-
-
-
-
-
-        private string resultSelection(Random _rand, HungryCompasMap _map ) //takes generated list of coordinates and decides which will become the new destination
+        private string resultSelection(Random _rand, HungryCompasMap _map ) 
         {
             string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
+            List<Point> randomPointGeneration = new List<Point>();
+            randomPointGeneration.Add(new Point(0, 50));
+            randomPointGeneration.Add(new Point(0, -50));
+            randomPointGeneration.Add(new Point(50, 0));
+            randomPointGeneration.Add(new Point(-50, 0));
 
+
+
+
+            if (results[0].Count > 0)
+            {
+                holder = results[0][_rand.Next(results[0].Count)];
+            }
+            else
+            {
+                holder = randomPointGeneration[_rand.Next(randomPointGeneration.Count)];
+                holder = new Point(_map.CritterLocation.X + holder.X, _map.CritterLocation.Y + holder.Y);
+            }
+        
            
             returnValue += holder.X + ":" + holder.Y;
 
@@ -103,11 +111,11 @@ namespace _100476935
 
                 if (_movementInfo[_index, 0] == 0)
                 {
-                    results[3].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
+                    results[1].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
                 }
                 else if (_movementInfo[_index, 0] == 1)
                 {
-                    results[3].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
+                    results[1].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
                 }
                 return false;
             }
@@ -118,29 +126,11 @@ namespace _100476935
 
         }
 
-        private void CheckForExit(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
-        {
-            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][2])
-            {
-                results[0].Add(_testLocation);
-            }
-        }
-
-        private void CheckForObjective(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
+        private void CheckForFood(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
         {
             if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][1])
             {
-                results[2].Add(_testLocation);
-            }
-        }
-
-        private void CheckForExitAxis(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
-        {
-
-            if (_map.Goal.X == _testLocation.X || _map.Goal.Y == _testLocation.Y)
-            {
-
-                results[1].Add(_testLocation);
+                results[0].Add(_testLocation);
             }
         }
 

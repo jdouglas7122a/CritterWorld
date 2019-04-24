@@ -75,10 +75,10 @@ namespace _100476935
                 holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
                 Array.ForEach(holder, messageSegment =>
                 {
-                    if (messageSegment.Contains("EscapeHatch"))
+                    if (messageSegment.Contains("Food"))
                     {
                         target = GeneratePoint(messageSegment);
-                        HungryCompasMapInfo[PointToString(target)][2] = true;
+                        HungryCompasMapInfo[PointToString(target)][1] = true;
                         HungryCompasMapInfo[PointToString(target)][3] = true;
                         Goal = target;
                     }
@@ -106,13 +106,7 @@ namespace _100476935
                         HungryCompasMapInfo[PointToString(target)][0] = true;
                         HungryCompasMapInfo[PointToString(target)][3] = true;
                     }
-                    else if (messageSegment.Contains("Food") || messageSegment.Contains("Gift"))
-                    {
-                        target = GeneratePoint(messageSegment);
-                        HungryCompasMapInfo[PointToString(target)][1] = true;
-                        HungryCompasMapInfo[PointToString(target)][3] = true;
-                    }
-
+                  
                 });
             }
         }

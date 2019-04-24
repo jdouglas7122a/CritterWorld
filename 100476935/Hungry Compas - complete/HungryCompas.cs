@@ -121,7 +121,6 @@ namespace _100476935
                     }
                     break;
                 case "CRASHED":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", message);
                     break;
                 case "ARENA_SIZE":
                     map = new HungryCompasMap(message);
@@ -143,12 +142,6 @@ namespace _100476935
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:3");
                     break;
-                
-
-
-
-
-
             }
         }
     }
