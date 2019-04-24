@@ -110,7 +110,6 @@ namespace _100476935
             {
                 case "LAUNCH":
                     arenaInitialized = false;
-                    //System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Start");
                     LoadSettings();
                     Responder("STOP");
                     Responder("GET_ARENA_SIZE:1");
@@ -122,19 +121,14 @@ namespace _100476935
                     }
                     break;
                 case "CRASHED":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\crashReport.txt", message);
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", message);
                     break;
-
-
-
                 case "ARENA_SIZE":
-                   // System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Arena Size");
                     map = new CompasV3Map(message);
                     arenaInitialized = true;
                     Responder("SCAN:2");
                     break;
                 case "SCAN":
-                  //  System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Scan");
                     map.UpdateMap(message);
                     Responder("GET_LOCATION:3");
                     break;
@@ -145,7 +139,6 @@ namespace _100476935
 
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:3");
-                  // System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Reached");
 
                     break;
                 

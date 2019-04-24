@@ -10,7 +10,7 @@ namespace _100476935
 {
     public class CompasV3Movment
     {
-        public List<List<Point>> results = new List<List<Point>>(); // goal, objective, avoid
+        private List<List<Point>> results = new List<List<Point>>(); // goal, goal axis , objective, avoid
 
         public CompasV3Movment()
         {
@@ -19,10 +19,9 @@ namespace _100476935
 
         public string MoveCritter(CompasV3Map _map)
         {
-            Boolean goFurther = false;
-            string returnValue = "SET_DESTINATION:";
+            Boolean goFurther = false; // variable that defines if the "test location" has reached its limit distance
             Random rand = new Random();
-            Point testLocation = new Point(0, 0);
+            Point testLocation = new Point(0, 0); // location that is compared to the generated map in V3 Mapping
 
             results = new List<List<Point>>();
 
@@ -39,6 +38,7 @@ namespace _100476935
 
             for (int index = 0; index != 4; index++) // for each direction
             {
+
                 goFurther = true;
                 while (goFurther) // while the line has not come into contact with obstruction
                 {
@@ -53,42 +53,49 @@ namespace _100476935
                     }
 
 
-                    goFurther = CheckForAvoid(_map, testLocation, movementInfo, index);
-
-                    if (movementInfo[index, 2] == 1 && movementInfo[index, 1] > 150)
-                    {
-                        System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", testLocation.X + " " + testLocation.Y);
-                        goFurther = false;
-                        results[1].Add(testLocation);
-                    }
-                    else if (movementInfo[index, 2] == -1 && movementInfo[index, 1] < -150)
-                    {
-                        goFurther = false;
-                        results[2].Add(testLocation);
-                    }
+                    goFurther = CheckForAvoid(_map, testLocation, movementInfo, index); // checks what the 
 
 
                     if (goFurther == true)
                     {
                         CheckForExit(_map, testLocation, movementInfo, index);
-
+                        CheckForExitAxis(_map, testLocation, movementInfo, index);
                         CheckForObjective(_map, testLocation, movementInfo, index);
                     }
 
                 }
             }
 
+           
+
+            return resultSelection(rand);
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+        private string resultSelection(Random _rand) //takes generated list of coordinates and decides which will become the new destination
+        {
+            string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
 
-            if (results[0].Count == 0)
+           // System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", "Number of accessible exits: " + results[0].Count + ".\nNumber of accessible exit axis: " + results[1].Count +".\nNumber of accessible objectives: " + results[2].Count + ".\nNumber Of Avoid Coordinates: " + results[3].Count);
+
+            if (results[0].Count < 1)
             {
-                if (results[1].Count == 0)
+                if (results[1].Count < 1)
                 {
-                    holder = results[2][rand.Next(results[2].Count)];
+                    if (results[2].Count < 1)
+                    {
+                        holder = results[3][_rand.Next(results[3].Count)];
+                    }
+                    else
+                    {
+                        holder = results[2][_rand.Next(results[2].Count)];
+                    }
                 }
                 else
                 {
-                    holder = results[1][rand.Next(results[1].Count)];
+                    holder = results[1][_rand.Next(results[1].Count)];
                 }
             }
             else
@@ -101,23 +108,23 @@ namespace _100476935
             return returnValue;
         }
 
-
-
-
-        public Boolean CheckForAvoid(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
+        private Boolean CheckForAvoid(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index) //checks if a coordinate needs to be avoided 
         {
             if (_map.compasV3MapInfo[_map.PointToString(_testLocation)][0])
             {
 
                 int multiplacationHolder = _movementInfo[_index, 2] * 5;
 
+               
+
+
                 if (_movementInfo[_index, 0] == 0)
                 {
-                    results[2].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
+                    results[3].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
                 }
                 else if (_movementInfo[_index, 0] == 1)
                 {
-                    results[2].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
+                    results[3].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
                 }
                 return false;
             }
@@ -128,7 +135,7 @@ namespace _100476935
 
         }
 
-        public void CheckForExit(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
+        private void CheckForExit(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
         {
             if (_map.compasV3MapInfo[_map.PointToString(_testLocation)][2])
             {
@@ -136,10 +143,20 @@ namespace _100476935
             }
         }
 
-        public void CheckForObjective(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
+        private void CheckForObjective(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
         {
             if (_map.compasV3MapInfo[_map.PointToString(_testLocation)][1])
             {
+                results[2].Add(_testLocation);
+            }
+        }
+
+        private void CheckForExitAxis(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
+        {
+
+            if (_map.Goal.X == _testLocation.X || _map.Goal.Y == _testLocation.Y)
+            {
+
                 results[1].Add(_testLocation);
             }
         }

@@ -68,9 +68,8 @@ namespace _100476935
 
             string[] holder = _message.Split('\t');
             Point target = new Point(0, 0);
-            if (holder[0] == "SEE:Nothing")
+            if (!holder[0].Contains("Nothing"))
             {
-               // System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", "crash message: " + _message);
                 holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
                 Array.ForEach(holder, messageSegment =>
                 {
@@ -81,13 +80,16 @@ namespace _100476935
                         compasV3MapInfo[PointToString(target)][3] = true;
                         Goal = target;
                     }
-                    else if (messageSegment.Contains("Bomb"))
+
+                    if (messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
-                        compasV3MapInfo[PointToString(target)][0] = true;
+                        compasV3MapInfo[PointToString(target)][2] = true;  
                         compasV3MapInfo[PointToString(target)][3] = true;
+                        Goal = target;
                     }
-                    else if (messageSegment.Contains("Terrain"))
+
+                    else if (messageSegment.Contains("Bomb") || messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
                         compasV3MapInfo[PointToString(target)][0] = true;
