@@ -16,6 +16,7 @@ namespace _100476935
         public Point Goal = new Point (0,0);
         public Dictionary<string, List<Boolean>> compasV3MapInfo = new Dictionary<string, List<Boolean>>();
         // avoid, food, escape, evaluated
+        public bool goalAxisEnter = false;
 
         public CompasV3Map()
         {
@@ -30,6 +31,7 @@ namespace _100476935
             mapHeight = int.Parse(holder[1]);
             Boolean[] PointConditions = new Boolean[4] { false, false, false, false };
             int[] count = new int[2] { 0, mapWidth * mapHeight };
+            goalAxisEnter = false;
 
             for (int i = 0; i != mapWidth + 1; i++)
             {
@@ -86,7 +88,16 @@ namespace _100476935
                         target = GeneratePoint(messageSegment);
                         compasV3MapInfo[PointToString(target)][2] = true;  
                         compasV3MapInfo[PointToString(target)][3] = true;
-                        Goal = target;
+                        for (int i = -4; i != 5; i++)
+                        {
+                            for (int i2 = -4; i2 != 5; i2++)
+                            {
+                                compasV3MapInfo[PointToString(new Point(target.X + i, target.Y + i2))][2] = true;
+                                compasV3MapInfo[PointToString(new Point(target.X + i, target.Y + i2))][3] = true;
+
+                            }
+                        }
+
                     }
 
                     else if (messageSegment.Contains("Bomb") || messageSegment.Contains("Terrain"))

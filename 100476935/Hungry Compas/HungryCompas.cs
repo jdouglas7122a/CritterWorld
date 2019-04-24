@@ -137,9 +137,11 @@ namespace _100476935
                     Responder(move.MoveCritter(map) + ":" +EatSpeed);
                     break;
 
+                case "BUMP":
+                    Responder("RANDOM_DESTINATION");
+                    break;
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:3");
-
                     break;
                 
 

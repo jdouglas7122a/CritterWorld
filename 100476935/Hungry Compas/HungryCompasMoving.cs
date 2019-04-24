@@ -68,41 +68,56 @@ namespace _100476935
 
            
 
-            return resultSelection(rand);
+            return resultSelection(rand, _map);
         }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-        private string resultSelection(Random _rand) //takes generated list of coordinates and decides which will become the new destination
+
+
+
+
+
+
+
+        private string resultSelection(Random _rand, CompasV3Map _map ) //takes generated list of coordinates and decides which will become the new destination
         {
             string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
 
-           // System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", "Number of accessible exits: " + results[0].Count + ".\nNumber of accessible exit axis: " + results[1].Count +".\nNumber of accessible objectives: " + results[2].Count + ".\nNumber Of Avoid Coordinates: " + results[3].Count);
-
-            if (results[0].Count < 1)
+            if (results[2].Count > 0)
             {
-                if (results[1].Count < 1)
+                holder = results[2][_rand.Next(results[2].Count)];
+            }
+            else
+            {
+                holder = results[3][_rand.Next(results[3].Count)];
+         /*       holder = new Point(holder.X - _map.CritterLocation.X, holder.Y - _map.CritterLocation.Y);
+                if(holder.X != 0)
                 {
-                    if (results[2].Count < 1)
+                    if(holder.X > 0)
                     {
-                        holder = results[3][_rand.Next(results[3].Count)];
+                        holder = new Point(_map.CritterLocation.X + 50, _map.CritterLocation.Y + holder.Y);
                     }
-                    else
+                    else if (holder.X < 0)
                     {
-                        holder = results[2][_rand.Next(results[2].Count)];
+                        holder = new Point(_map.CritterLocation.X - 50, _map.CritterLocation.Y + holder.Y);
                     }
                 }
                 else
                 {
-                    holder = results[1][_rand.Next(results[1].Count)];
+                    if (holder.Y > 0)
+                    {
+                        holder = new Point(_map.CritterLocation.X , _map.CritterLocation.Y + holder.Y + 50);
+                    }
+                    else if (holder.Y < 0)
+                    {
+                        holder = new Point(_map.CritterLocation.X , _map.CritterLocation.Y + holder.Y - 50);
+                    }
                 }
-            }
-            else
-            {
-                holder = results[0][0];
-            }
 
+         */   }
+           
             returnValue += holder.X + ":" + holder.Y;
 
             return returnValue;
