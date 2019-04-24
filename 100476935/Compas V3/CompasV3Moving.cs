@@ -1,4 +1,5 @@
 ﻿using CritterController;
+using CritterWorld;
 using System;
 using System.Drawing;
 using System.IO;
@@ -9,24 +10,34 @@ namespace _100476935
 {
     public class CompasV3Movment
     {
+        public List<List<Point>> results = new List<List<Point>>(); // goal, objective, avoid
+
         public CompasV3Movment()
         {
-            
+
         }
 
         public string MoveCritter(CompasV3Map _map)
         {
+            Boolean goFurther = false;
             string returnValue = "SET_DESTINATION:";
             Random rand = new Random();
-            Boolean goFurther = false;
-            Point testLocation = new Point(0,0);
-            List<Point> results = new List<Point>();
+            Point testLocation = new Point(0, 0);
+
+            results = new List<List<Point>>();
+
+            for (int i = 0; i != 4; i++)
+            {
+                results.Add(new List<Point>());
+            }
+
+            results.Add(new List<Point>());
             int[,] movementInfo = new int[4, 4] { // if it targets x or y, how far its traveled, weather it increments or decrements, finishing location score
                                                    { 1 , 0 , 1 , 0 }, { 0 , 0 , -1 , 0 },
                                                    { 1 , 0 , -1 , 0 }, { 0 , 0 , 1 , 0 }
                                                    };
 
-            for(int index = 0; index != 4; index++) // for each direction
+            for (int index = 0; index != 4; index++) // for each direction
             {
                 goFurther = true;
                 while (goFurther) // while the line has not come into contact with obstruction
@@ -34,7 +45,7 @@ namespace _100476935
                     movementInfo[index, 1] += movementInfo[index, 2]; //increment of decrement the disance the line has traveled
                     if (movementInfo[index, 0] == 0) // if it targets X
                     {
-                        testLocation = new Point(_map.CritterLocation.X + movementInfo[index, 1], _map.CritterLocation.Y);
+                        testLocation = new Point(_map.CritterLocation.X + movementInfo[index, 1], _map.CritterLocation.Y); // x -1, y
                     }
                     else if (movementInfo[index, 0] == 1) // if it targets Y
                     {
@@ -42,46 +53,96 @@ namespace _100476935
                     }
 
 
-                    if (testLocation.X > 0 && testLocation.Y > 0)
-                    {
-                        if (_map.compasV3MapInfo[_map.PointToString(testLocation)][0]) //checks the location dictionary to see if the tester location is to be avoided
-                        {
-                            goFurther = false;
+                    goFurther = CheckForAvoid(_map, testLocation, movementInfo, index);
 
-                            if (movementInfo[index, 0] == 0)
-                            {
-                                results.Add(new Point(testLocation.X - (5 * movementInfo[index, 2]), testLocation.Y));
-                            }
-                            else if (movementInfo[index, 0] == 1)
-                            {
-                                results.Add(new Point(testLocation.X, testLocation.Y - (5 * movementInfo[index, 2])));
-                            }
-                        }
-                        else if (movementInfo[index, 1] >= 50)
-                        {
-                            goFurther = false;
-                            results.Add(testLocation);
-                        }
+                    if (movementInfo[index, 2] == 1 && movementInfo[index, 1] > 150)
+                    {
+                        System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", testLocation.X + " " + testLocation.Y);
+                        goFurther = false;
+                        results[1].Add(testLocation);
                     }
-                    else
+                    else if (movementInfo[index, 2] == -1 && movementInfo[index, 1] < -150)
                     {
                         goFurther = false;
+                        results[2].Add(testLocation);
                     }
+
+
+                    if (goFurther == true)
+                    {
+                        CheckForExit(_map, testLocation, movementInfo, index);
+
+                        CheckForObjective(_map, testLocation, movementInfo, index);
+                    }
+
                 }
             }
-            results.ForEach(result => //is result on axis with goal 
+
+            Point holder = new Point(0, 0);
+
+            if (results[0].Count == 0)
             {
-                if (result.X == _map.Goal.X || result.Y == _map.Goal.Y)
+                if (results[1].Count == 0)
                 {
-                    returnValue += result.X + ":" + result.Y;
+                    holder = results[2][rand.Next(results[2].Count)];
                 }
-            });
-            if (returnValue == "SET_DESTINATION:") // is return value still empty
-            {
-                Point holder = results[rand.Next(4)];
-                returnValue += holder.X + ":" + holder.Y;
+                else
+                {
+                    holder = results[1][rand.Next(results[1].Count)];
+                }
             }
+            else
+            {
+                holder = results[0][0];
+            }
+
+            returnValue += holder.X + ":" + holder.Y;
+
             return returnValue;
         }
+
+
+
+
+        public Boolean CheckForAvoid(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
+        {
+            if (_map.compasV3MapInfo[_map.PointToString(_testLocation)][0])
+            {
+
+                int multiplacationHolder = _movementInfo[_index, 2] * 5;
+
+                if (_movementInfo[_index, 0] == 0)
+                {
+                    results[2].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
+                }
+                else if (_movementInfo[_index, 0] == 1)
+                {
+                    results[2].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
+                }
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        public void CheckForExit(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
+        {
+            if (_map.compasV3MapInfo[_map.PointToString(_testLocation)][2])
+            {
+                results[0].Add(_testLocation);
+            }
+        }
+
+        public void CheckForObjective(CompasV3Map _map, Point _testLocation, int[,] _movementInfo, int _index)
+        {
+            if (_map.compasV3MapInfo[_map.PointToString(_testLocation)][1])
+            {
+                results[1].Add(_testLocation);
+            }
+        }
+
     }
 }

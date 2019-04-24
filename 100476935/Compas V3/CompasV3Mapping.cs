@@ -70,7 +70,7 @@ namespace _100476935
             Point target = new Point(0, 0);
             if (holder[0] == "SEE:Nothing")
             {
-                System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", "crash message: " + _message);
+               // System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", "crash message: " + _message);
                 holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
                 Array.ForEach(holder, messageSegment =>
                 {
@@ -93,12 +93,13 @@ namespace _100476935
                         compasV3MapInfo[PointToString(target)][0] = true;
                         compasV3MapInfo[PointToString(target)][3] = true;
                     }
-                    else if (messageSegment.Contains("Food"))
+                    else if (messageSegment.Contains("Food") || messageSegment.Contains("Gift"))
                     {
                         target = GeneratePoint(messageSegment);
                         compasV3MapInfo[PointToString(target)][1] = true;
                         compasV3MapInfo[PointToString(target)][3] = true;
                     }
+
                 });
             }
         }

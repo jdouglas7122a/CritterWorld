@@ -128,25 +128,24 @@ namespace _100476935
 
 
                 case "ARENA_SIZE":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Arena Size");
+                   // System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Arena Size");
                     map = new CompasV3Map(message);
                     arenaInitialized = true;
                     Responder("SCAN:2");
                     break;
                 case "SCAN":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Scan");
+                  //  System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Scan");
                     map.UpdateMap(message);
                     Responder("GET_LOCATION:3");
                     break;
                 case "LOCATION":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt",actionCounter.ToString());
                     map.UpdateCritterLocation(message);
                     Responder(move.MoveCritter(map) + ":" +EatSpeed);
                     break;
 
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:3");
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Reached");
+                  // System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CheckPoints.txt", "MessageRecieved: Reached");
 
                     break;
                 
