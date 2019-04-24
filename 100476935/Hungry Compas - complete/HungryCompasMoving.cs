@@ -25,7 +25,7 @@ namespace _100476935
 
             results = new List<List<Point>>();
 
-            for (int i = 0; i != 4; i++)
+            for (int i = 0; i != 2; i++)
             {
                 results.Add(new List<Point>());
             }
@@ -51,10 +51,7 @@ namespace _100476935
                     {
                         testLocation = new Point(_map.CritterLocation.X, _map.CritterLocation.Y + movementInfo[index, 1]);
                     }
-
-
                     goFurther = CheckForAvoid(_map, testLocation, movementInfo, index); 
-
 
                     if (goFurther == true)
                     {
@@ -63,9 +60,6 @@ namespace _100476935
 
                 }
             }
-
-           
-
             return resultSelection(rand, _map);
         }
 
@@ -80,9 +74,6 @@ namespace _100476935
             randomPointGeneration.Add(new Point(50, 0));
             randomPointGeneration.Add(new Point(-50, 0));
 
-
-
-
             if (results[0].Count > 0)
             {
                 holder = results[0][_rand.Next(results[0].Count)];
@@ -93,7 +84,6 @@ namespace _100476935
                 holder = new Point(_map.CritterLocation.X + holder.X, _map.CritterLocation.Y + holder.Y);
             }
         
-           
             returnValue += holder.X + ":" + holder.Y;
 
             return returnValue;
@@ -103,11 +93,7 @@ namespace _100476935
         {
             if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][0])
             {
-
                 int multiplacationHolder = _movementInfo[_index, 2] * 5;
-
-               
-
 
                 if (_movementInfo[_index, 0] == 0)
                 {

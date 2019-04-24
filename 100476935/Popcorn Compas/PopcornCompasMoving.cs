@@ -10,7 +10,7 @@ namespace _100476935
 {
     public class PopcornCompasMovment
     {
-        private List<List<Point>> results = new List<List<Point>>(); // goal, goal axis , objective, avoid
+        private List<List<Point>> results = new List<List<Point>>(); // bomb, terrain
 
         public PopcornCompasMovment()
         {
@@ -25,7 +25,7 @@ namespace _100476935
 
             results = new List<List<Point>>();
 
-            for (int i = 0; i != 4; i++)
+            for (int i = 0; i != 2; i++)
             {
                 results.Add(new List<Point>());
             }
@@ -58,9 +58,7 @@ namespace _100476935
 
                     if (goFurther == true)
                     {
-                        CheckForExit(_map, testLocation, movementInfo, index);
-                        CheckForExitAxis(_map, testLocation, movementInfo, index);
-                        CheckForObjective(_map, testLocation, movementInfo, index);
+                        CheckForFun(_map, testLocation, movementInfo, index);
                     }
 
                 }
@@ -71,21 +69,15 @@ namespace _100476935
             return resultSelection(rand, _map);
         }
 
-        //---------------------------------------------------------------------------------------------------------------------------------------------------------------//
-
-
-
-
-
-
-
+      
 
         private string resultSelection(Random _rand, PopcornCompasMap _map ) //takes generated list of coordinates and decides which will become the new destination
         {
             string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
 
-          
+            
+
             returnValue += holder.X + ":" + holder.Y;
 
             return returnValue;
@@ -93,21 +85,17 @@ namespace _100476935
 
         private Boolean CheckForAvoid(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index) //checks if a coordinate needs to be avoided 
         {
-            if (_map.PopcornCompasMapInfo[_map.PointToString(_testLocation)][0])
+            if (_map.PopcornCompasMapInfo[_map.PointToString(_testLocation)][1])
             {
-
                 int multiplacationHolder = _movementInfo[_index, 2] * 5;
-
-               
-
 
                 if (_movementInfo[_index, 0] == 0)
                 {
-                    results[3].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
+                    results[1].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
                 }
                 else if (_movementInfo[_index, 0] == 1)
                 {
-                    results[3].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
+                    results[1].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
                 }
                 return false;
             }
@@ -118,31 +106,14 @@ namespace _100476935
 
         }
 
-        private void CheckForExit(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
+        private void CheckForFun(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
         {
-            if (_map.PopcornCompasMapInfo[_map.PointToString(_testLocation)][2])
+            if (_map.PopcornCompasMapInfo[_map.PointToString(_testLocation)][0])
             {
                 results[0].Add(_testLocation);
             }
         }
 
-        private void CheckForObjective(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
-        {
-            if (_map.PopcornCompasMapInfo[_map.PointToString(_testLocation)][1])
-            {
-                results[2].Add(_testLocation);
-            }
-        }
-
-        private void CheckForExitAxis(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
-        {
-
-            if (_map.Goal.X == _testLocation.X || _map.Goal.Y == _testLocation.Y)
-            {
-
-                results[1].Add(_testLocation);
-            }
-        }
 
     }
 }

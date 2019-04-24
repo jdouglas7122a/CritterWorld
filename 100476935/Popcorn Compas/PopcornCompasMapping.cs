@@ -43,23 +43,23 @@ namespace _100476935
 
             for (int i = 0; i != mapWidth; i++)
             {
-                PopcornCompasMapInfo[PointToString(new Point(i, 0))][0] = true;
+                PopcornCompasMapInfo[PointToString(new Point(i, 0))][1] = true;
                 PopcornCompasMapInfo[PointToString(new Point(i, 0))][3] = true;
             }
             for (int i = 0; i != mapWidth; i++)
             {
 
-                PopcornCompasMapInfo[PointToString(new Point(i, mapHeight))][0] = true;
+                PopcornCompasMapInfo[PointToString(new Point(i, mapHeight))][1] = true;
                 PopcornCompasMapInfo[PointToString(new Point(i, mapHeight))][3] = true;
             }
             for (int i = 0; i != mapHeight; i++)
             {
-                PopcornCompasMapInfo[PointToString(new Point(0, i))][0] = true;
+                PopcornCompasMapInfo[PointToString(new Point(0, i))][1] = true;
                 PopcornCompasMapInfo[PointToString(new Point(0, i))][3] = true;
             }
             for (int i = 0; i != mapHeight; i++)
             {
-                PopcornCompasMapInfo[PointToString(new Point(mapWidth, i))][0] = true;
+                PopcornCompasMapInfo[PointToString(new Point(mapWidth, i))][1] = true;
                 PopcornCompasMapInfo[PointToString(new Point(mapWidth, i))][3] = true;
             }
 
@@ -75,44 +75,30 @@ namespace _100476935
                 holder[0] = holder[0].Substring(holder[0].IndexOf('\n') + 1, holder[0].IndexOf('}') - holder[0].IndexOf('\n'));
                 Array.ForEach(holder, messageSegment =>
                 {
-                    if (messageSegment.Contains("EscapeHatch"))
-                    {
-                        target = GeneratePoint(messageSegment);
-                        PopcornCompasMapInfo[PointToString(target)][2] = true;
-                        PopcornCompasMapInfo[PointToString(target)][3] = true;
-                        Goal = target;
-                    }
-
+                    
                     if (messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
-                        PopcornCompasMapInfo[PointToString(target)][2] = true;
+                        PopcornCompasMapInfo[PointToString(target)][1] = true;
                         PopcornCompasMapInfo[PointToString(target)][3] = true;
                         for (int i = -4; i != 5; i++)
                         {
                             for (int i2 = -4; i2 != 5; i2++)
                             {
-                                PopcornCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][2] = true;
+                                PopcornCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][1] = true;
                                 PopcornCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][3] = true;
 
                             }
                         }
 
                     }
-
-                    else if (messageSegment.Contains("Bomb") || messageSegment.Contains("Terrain"))
+                    else if (messageSegment.Contains("Bomb") )
                     {
                         target = GeneratePoint(messageSegment);
                         PopcornCompasMapInfo[PointToString(target)][0] = true;
                         PopcornCompasMapInfo[PointToString(target)][3] = true;
                     }
-                    else if (messageSegment.Contains("Food") || messageSegment.Contains("Gift"))
-                    {
-                        target = GeneratePoint(messageSegment);
-                        PopcornCompasMapInfo[PointToString(target)][1] = true;
-                        PopcornCompasMapInfo[PointToString(target)][3] = true;
-                    }
-
+                   
                 });
             }
         }
