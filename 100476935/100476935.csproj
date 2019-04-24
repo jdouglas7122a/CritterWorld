@@ -43,6 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Popcorn Compas\PopcornCompas.cs" />
+    <Compile Include="Popcorn Compas\PopcornCompasMapping.cs" />
+    <Compile Include="Popcorn Compas\PopcornCompasMoving.cs" />
+    <Compile Include="Popcorn Compas\ScaredCompasSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Popcorn Compas\ScaredCompasSettings.Designer.cs">
+      <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scared Compas\ScaredCompas.cs" />
+    <Compile Include="Scared Compas\ScaredCompasMapping.cs" />
+    <Compile Include="Scared Compas\ScaredCompasMovment.cs" />
+    <Compile Include="Scared Compas\ScaredCompasSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Scared Compas\ScaredCompasSettings.Designer.cs">
+      <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hungry Compas\HungryCompasMoving.cs" />
     <Compile Include="Hungry Compas\HungryCompasMapping.cs" />
     <Compile Include="Hungry Compas\HungryCompas.cs" />
@@ -57,6 +75,12 @@
     <Compile Include="Wanderer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Popcorn Compas\ScaredCompasSettings.resx">
+      <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scared Compas\ScaredCompasSettings.resx">
+      <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Hungry Compas\HungryCompasSettings.resx">
       <DependentUpon>HungryCompasSettings.cs</DependentUpon>
     </EmbeddedResource>

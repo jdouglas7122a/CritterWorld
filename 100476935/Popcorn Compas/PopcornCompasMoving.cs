@@ -8,16 +8,16 @@ using System.Collections.Generic;
 
 namespace _100476935
 {
-    public class HungryCompasMovment
+    public class PopcornCompasMovment
     {
         private List<List<Point>> results = new List<List<Point>>(); // goal, goal axis , objective, avoid
 
-        public HungryCompasMovment()
+        public PopcornCompasMovment()
         {
 
         }
 
-        public string MoveCritter(HungryCompasMap _map)
+        public string MoveCritter(PopcornCompasMap _map)
         {
             Boolean goFurther = false; // variable that defines if the "test location" has reached its limit distance
             Random rand = new Random();
@@ -80,20 +80,20 @@ namespace _100476935
 
 
 
-        private string resultSelection(Random _rand, HungryCompasMap _map ) //takes generated list of coordinates and decides which will become the new destination
+        private string resultSelection(Random _rand, PopcornCompasMap _map ) //takes generated list of coordinates and decides which will become the new destination
         {
             string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
 
-           
+          
             returnValue += holder.X + ":" + holder.Y;
 
             return returnValue;
         }
 
-        private Boolean CheckForAvoid(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index) //checks if a coordinate needs to be avoided 
+        private Boolean CheckForAvoid(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index) //checks if a coordinate needs to be avoided 
         {
-            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][0])
+            if (_map.PopcornCompasMapInfo[_map.PointToString(_testLocation)][0])
             {
 
                 int multiplacationHolder = _movementInfo[_index, 2] * 5;
@@ -118,23 +118,23 @@ namespace _100476935
 
         }
 
-        private void CheckForExit(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
+        private void CheckForExit(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
         {
-            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][2])
+            if (_map.PopcornCompasMapInfo[_map.PointToString(_testLocation)][2])
             {
                 results[0].Add(_testLocation);
             }
         }
 
-        private void CheckForObjective(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
+        private void CheckForObjective(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
         {
-            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][1])
+            if (_map.PopcornCompasMapInfo[_map.PointToString(_testLocation)][1])
             {
                 results[2].Add(_testLocation);
             }
         }
 
-        private void CheckForExitAxis(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
+        private void CheckForExitAxis(PopcornCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
         {
 
             if (_map.Goal.X == _testLocation.X || _map.Goal.Y == _testLocation.Y)

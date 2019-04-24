@@ -1,6 +1,6 @@
 ﻿namespace _100476935
 {
-    partial class HungryCompasSettings
+    partial class PopcornCompasSettings
     {
         /// <summary>
         /// Required designer variable.

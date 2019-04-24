@@ -8,22 +8,22 @@ using System.Collections.Generic;
 namespace _100476935
 {
 
-    public class HungryCompasMap
+    public class ScaredCompasMap
     {
         public int mapWidth;
         public int mapHeight;
         public Point CritterLocation = new Point(0,0);
         public Point Goal = new Point (0,0);
-        public Dictionary<string, List<Boolean>> HungryCompasMapInfo = new Dictionary<string, List<Boolean>>();
+        public Dictionary<string, List<Boolean>> ScaredCompasMapInfo = new Dictionary<string, List<Boolean>>();
         // avoid, food, escape, evaluated
         public bool goalAxisEnter = false;
 
-        public HungryCompasMap()
+        public ScaredCompasMap()
         {
 
         }
     
-        public HungryCompasMap(string _message)
+        public ScaredCompasMap(string _message)
         {
             _message = _message.Substring(_message.IndexOf('1') + 2);
             string[] holder = _message.Split(':');
@@ -37,30 +37,30 @@ namespace _100476935
             {
                 for (int i2 = 0; i2 != mapHeight + 1; i2++)
                 {
-                    HungryCompasMapInfo.Add(PointToString(new Point(i, i2)), new List<Boolean>(PointConditions));
+                    ScaredCompasMapInfo.Add(PointToString(new Point(i, i2)), new List<Boolean>(PointConditions));
                 }
             }
 
             for (int i = 0; i != mapWidth; i++)
             {
-                HungryCompasMapInfo[PointToString(new Point(i, 0))][0] = true;
-                HungryCompasMapInfo[PointToString(new Point(i, 0))][3] = true;
+                ScaredCompasMapInfo[PointToString(new Point(i, 0))][0] = true;
+                ScaredCompasMapInfo[PointToString(new Point(i, 0))][3] = true;
             }
             for (int i = 0; i != mapWidth; i++)
             {
 
-                HungryCompasMapInfo[PointToString(new Point(i, mapHeight))][0] = true;
-                HungryCompasMapInfo[PointToString(new Point(i, mapHeight))][3] = true;
+                ScaredCompasMapInfo[PointToString(new Point(i, mapHeight))][0] = true;
+                ScaredCompasMapInfo[PointToString(new Point(i, mapHeight))][3] = true;
             }
             for (int i = 0; i != mapHeight; i++)
             {
-                HungryCompasMapInfo[PointToString(new Point(0, i))][0] = true;
-                HungryCompasMapInfo[PointToString(new Point(0, i))][3] = true;
+                ScaredCompasMapInfo[PointToString(new Point(0, i))][0] = true;
+                ScaredCompasMapInfo[PointToString(new Point(0, i))][3] = true;
             }
             for (int i = 0; i != mapHeight; i++)
             {
-                HungryCompasMapInfo[PointToString(new Point(mapWidth, i))][0] = true;
-                HungryCompasMapInfo[PointToString(new Point(mapWidth, i))][3] = true;
+                ScaredCompasMapInfo[PointToString(new Point(mapWidth, i))][0] = true;
+                ScaredCompasMapInfo[PointToString(new Point(mapWidth, i))][3] = true;
             }
 
         }
@@ -78,22 +78,22 @@ namespace _100476935
                     if (messageSegment.Contains("EscapeHatch"))
                     {
                         target = GeneratePoint(messageSegment);
-                        HungryCompasMapInfo[PointToString(target)][2] = true;
-                        HungryCompasMapInfo[PointToString(target)][3] = true;
+                        ScaredCompasMapInfo[PointToString(target)][2] = true;
+                        ScaredCompasMapInfo[PointToString(target)][3] = true;
                         Goal = target;
                     }
 
                     if (messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
-                        HungryCompasMapInfo[PointToString(target)][2] = true;
-                        HungryCompasMapInfo[PointToString(target)][3] = true;
+                        ScaredCompasMapInfo[PointToString(target)][2] = true;
+                        ScaredCompasMapInfo[PointToString(target)][3] = true;
                         for (int i = -4; i != 5; i++)
                         {
                             for (int i2 = -4; i2 != 5; i2++)
                             {
-                                HungryCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][2] = true;
-                                HungryCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][3] = true;
+                                ScaredCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][2] = true;
+                                ScaredCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][3] = true;
 
                             }
                         }
@@ -103,14 +103,14 @@ namespace _100476935
                     else if (messageSegment.Contains("Bomb") || messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
-                        HungryCompasMapInfo[PointToString(target)][0] = true;
-                        HungryCompasMapInfo[PointToString(target)][3] = true;
+                        ScaredCompasMapInfo[PointToString(target)][0] = true;
+                        ScaredCompasMapInfo[PointToString(target)][3] = true;
                     }
                     else if (messageSegment.Contains("Food") || messageSegment.Contains("Gift"))
                     {
                         target = GeneratePoint(messageSegment);
-                        HungryCompasMapInfo[PointToString(target)][1] = true;
-                        HungryCompasMapInfo[PointToString(target)][3] = true;
+                        ScaredCompasMapInfo[PointToString(target)][1] = true;
+                        ScaredCompasMapInfo[PointToString(target)][3] = true;
                     }
 
                 });

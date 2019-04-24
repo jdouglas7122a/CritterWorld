@@ -5,7 +5,7 @@ using System.IO;
 
 namespace _100476935
 {
-    public class HungryCompas : ICritterController
+    public class ScaredCompas : ICritterController
     {
 
         Point goal = new Point(-1, -1);
@@ -26,9 +26,9 @@ namespace _100476935
 
         public bool arenaInitialized = false;
 
-        public HungryCompasMap map = new HungryCompasMap();
+        public ScaredCompasMap map = new ScaredCompasMap();
 
-        public HungryCompasMovment move = new HungryCompasMovment();
+        public ScaredCompasMovment move = new ScaredCompasMovment();
 
         private void Log(string message)
         {
@@ -44,7 +44,7 @@ namespace _100476935
 
         private void LoadSettings()
         {
-            string fileName = "HungryCompas.cfg";
+            string fileName = "ScaredCompas.cfg";
             string fileSpec = Filepath + "/" + fileName;
             try
             {
@@ -74,7 +74,7 @@ namespace _100476935
 
         public void SaveSettings()
         {
-            string fileName = "HungryCompas.cfg";
+            string fileName = "ScaredCompas.cfg";
             string fileSpec = Filepath + "/" + fileName;
             try
             {
@@ -89,14 +89,14 @@ namespace _100476935
             }
         }
 
-        public HungryCompas(string name)
+        public ScaredCompas(string name)
         {
             Name = name;
         }
 
         public void LaunchUI()
         {
-            HungryCompasSettings settings = new HungryCompasSettings(this);
+            ScaredCompasSettings settings = new ScaredCompasSettings(this);
             settings.Show();
             settings.Focus();
         }
@@ -124,7 +124,7 @@ namespace _100476935
                     System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\General.txt", message);
                     break;
                 case "ARENA_SIZE":
-                    map = new HungryCompasMap(message);
+                    map = new ScaredCompasMap(message);
                     arenaInitialized = true;
                     Responder("SCAN:2");
                     break;
