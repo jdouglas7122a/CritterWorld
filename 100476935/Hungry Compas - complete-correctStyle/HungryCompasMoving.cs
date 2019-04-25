@@ -14,10 +14,9 @@ namespace _100476935
 
         public HungryCompasMovment()
         {
-
         }
 
-        public string MoveCritter(HungryCompasMap _map)
+        public string MoveCritter(HungryCompasMap _map, int _eatSpeed)
         {
             Boolean goFurther = false; // variable that defines if the "test location" has reached its limit distance
             Random rand = new Random();
@@ -55,11 +54,11 @@ namespace _100476935
                     }
                 }
             }
-            return resultSelection(rand, _map);
+            return resultSelection(rand, _map, _eatSpeed);
         }
 
 
-        private string resultSelection(Random _rand, HungryCompasMap _map ) 
+        private string resultSelection(Random _rand, HungryCompasMap _map, int _eatSpeed ) 
         {
             string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
@@ -77,15 +76,20 @@ namespace _100476935
             {
                 holder = randomPointGeneration[_rand.Next(randomPointGeneration.Count)];
                 holder = new Point(_map.CritterLocation.X + holder.X, _map.CritterLocation.Y + holder.Y);
+                while(holder.X < 0 || holder .X > _map.mapWidth || holder.Y < 0 || holder.Y > _map.mapHeight)
+                {
+                    holder = randomPointGeneration[_rand.Next(randomPointGeneration.Count)];
+                    holder = new Point(_map.CritterLocation.X + holder.X, _map.CritterLocation.Y + holder.Y);
+                }
             }
-            returnValue += holder.X + ":" + holder.Y;
+            returnValue += holder.X + ":" + holder.Y + ":" + _eatSpeed;
 
             return returnValue;
         }
 
         private Boolean CheckForAvoid(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index) //checks if a coordinate needs to be avoided 
         {
-            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][0])
+            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][1])
             {
                 int multiplacationHolder = _movementInfo[_index, 2] * 5;
                 if (_movementInfo[_index, 0] == 0)
@@ -106,7 +110,7 @@ namespace _100476935
 
         private void CheckForFood(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index)
         {
-            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][1])
+            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][0])
             {
                 results[0].Add(_testLocation);
             }
