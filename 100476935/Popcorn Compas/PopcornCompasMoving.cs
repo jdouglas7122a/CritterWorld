@@ -17,7 +17,7 @@ namespace _100476935
 
         }
 
-        public string MoveCritter(PopcornCompasMap _map)
+        public string MoveCritter(PopcornCompasMap _map, int _headForExitSpeed, int _eatSpeed)
         {
             Boolean goFurther = false; // variable that defines if the "test location" has reached its limit distance
             Random rand = new Random();
@@ -66,12 +66,12 @@ namespace _100476935
 
            
 
-            return resultSelection(rand, _map);
+            return resultSelection(rand, _map, _headForExitSpeed, _eatSpeed);
         }
 
       
 
-        private string resultSelection(Random _rand, PopcornCompasMap _map ) //takes generated list of coordinates and decides which will become the new destination
+        private string resultSelection(Random _rand, PopcornCompasMap _map, int _headForExitSpeed, int _eatSpeed ) //takes generated list of coordinates and decides which will become the new destination
         {
             string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
@@ -79,9 +79,12 @@ namespace _100476935
             if (results[0].Count > 0)
             {
                 holder = results[0][_rand.Next(results[0].Count)];
+                returnValue += holder.X + ":" + holder.Y + ":" + _headForExitSpeed;
             }
             else
-            returnValue += holder.X + ":" + holder.Y;
+            {
+                returnValue = "RANDOM_DESTINATION";
+            }
 
             return returnValue;
         }

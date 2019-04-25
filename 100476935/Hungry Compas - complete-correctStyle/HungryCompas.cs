@@ -138,6 +138,7 @@ namespace _100476935
                     Responder(move.MoveCritter(map, EatSpeed));
                     break;
                 case "BUMP":
+                    Responder("STOP");
                     Responder("RANDOM_DESTINATION");
                     break;
                 case "FIGHT":

@@ -136,21 +136,16 @@ namespace _100476935
                     break;
                 case "LOCATION":
                     map.UpdateCritterLocation(message);
-                    Responder(move.MoveCritter(map) + ":" +EatSpeed);
+                    Responder(move.MoveCritter(map, HeadForExitSpeed, EatSpeed));
                     break;
 
                 case "BUMP":
+                    Responder("STOP");
                     Responder("RANDOM_DESTINATION");
                     break;
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:3");
                     break;
-                
-
-
-
-
-
             }
         }
     }
