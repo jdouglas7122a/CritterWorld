@@ -43,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Popcorn Compas\PopcornCompas.cs" />
-    <Compile Include="Popcorn Compas\PopcornCompasMapping.cs" />
-    <Compile Include="Popcorn Compas\PopcornCompasMoving.cs" />
-    <Compile Include="Popcorn Compas\ScaredCompasSettings.cs">
+    <Compile Include="Popcorn Compas - complete-correctStyle\PopcornCompas.cs" />
+    <Compile Include="Popcorn Compas - complete-correctStyle\PopcornCompasMapping.cs" />
+    <Compile Include="Popcorn Compas - complete-correctStyle\PopcornCompasMoving.cs" />
+    <Compile Include="Popcorn Compas - complete-correctStyle\ScaredCompasSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Popcorn Compas\ScaredCompasSettings.Designer.cs">
+    <Compile Include="Popcorn Compas - complete-correctStyle\ScaredCompasSettings.Designer.cs">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Scared Compas - complete-correct style\ScaredCompas.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="Wanderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Popcorn Compas\ScaredCompasSettings.resx">
+    <EmbeddedResource Include="Popcorn Compas - complete-correctStyle\ScaredCompasSettings.resx">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scared Compas - complete-correct style\ScaredCompasSettings.resx">

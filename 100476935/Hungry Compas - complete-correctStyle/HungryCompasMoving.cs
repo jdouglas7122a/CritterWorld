@@ -89,7 +89,8 @@ namespace _100476935
 
         private Boolean CheckForAvoid(HungryCompasMap _map, Point _testLocation, int[,] _movementInfo, int _index) //checks if a coordinate needs to be avoided 
         {
-            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][1])
+
+            if (_map.HungryCompasMapInfo[_map.PointToString(_testLocation)][0])
             {
                 int multiplacationHolder = _movementInfo[_index, 2] * 5;
                 if (_movementInfo[_index, 0] == 0)
