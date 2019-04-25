@@ -91,6 +91,7 @@ namespace _100476935
                         }
 
                     }
+
                     else if (messageSegment.Contains("Bomb") )
                     {
                         target = GeneratePoint(messageSegment);

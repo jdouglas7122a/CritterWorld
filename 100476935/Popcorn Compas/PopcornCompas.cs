@@ -5,6 +5,9 @@ using System.IO;
 
 namespace _100476935
 {
+
+    //Popcorn loves bombs and nothing else
+
     public class PopcornCompas : ICritterController
     {
 

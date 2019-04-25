@@ -8,6 +8,8 @@ namespace _100476935
     public class HungryCompas : ICritterController
     {
 
+        //hungry just wants to eat
+
         Point goal = new Point(-1, -1);
 
         System.Timers.Timer getInfoTimer;
@@ -135,8 +137,10 @@ namespace _100476935
                     map.UpdateCritterLocation(message);
                     Responder(move.MoveCritter(map) + ":" +EatSpeed);
                     break;
-
                 case "BUMP":
+                    Responder("RANDOM_DESTINATION");
+                    break;
+                case "FIGHT":
                     Responder("RANDOM_DESTINATION");
                     break;
                 case "REACHED_DESTINATION":

@@ -76,8 +76,11 @@ namespace _100476935
             string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
 
-            
-
+            if (results[0].Count > 0)
+            {
+                holder = results[0][_rand.Next(results[0].Count)];
+            }
+            else
             returnValue += holder.X + ":" + holder.Y;
 
             return returnValue;

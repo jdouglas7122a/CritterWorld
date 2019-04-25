@@ -16,7 +16,7 @@ namespace _100476935
         {
         }
 
-        public string MoveCritter(ScaredCompasMap _map)
+        public string MoveCritter(ScaredCompasMap _map, int _eatSpeed, int _headForExitSpeed )
         {
             Boolean goFurther = false; // variable that defines if the "test location" has reached its limit distance
             Random rand = new Random();
@@ -56,17 +56,34 @@ namespace _100476935
                 }
             }
 
-            return resultSelection(rand, _map);
+            return resultSelection(rand, _map, _eatSpeed,_headForExitSpeed);
         }
 
-        private string resultSelection(Random _rand, ScaredCompasMap _map ) //takes generated list of coordinates and decides which will become the new destination
+        private string resultSelection(Random _rand, ScaredCompasMap _map, int _eatSpeed, int _headForExitSpeed ) //takes generated list of coordinates and decides which will become the new destination
         {
             string returnValue = "SET_DESTINATION:";
             Point holder = new Point(0, 0);
+            List<int> compareDistanceTraveled = new List<int>();
+            List<int> compareDistanceTraveledPositive = new List<int>();
+            Boolean exit = false;
 
-       
-           
-            returnValue += holder.X + ":" + holder.Y;
+            if(results[0].Count > 0)
+            {
+                holder = results[0][0];
+                exit = true;
+            }
+            else if(results[1].Count > 0)
+            {
+                holder = results[1][_rand.Next(results[1].Count)];
+            }
+            if(exit == true)
+            {
+                returnValue += holder.X + ":" + holder.Y + ":" + _headForExitSpeed;
+            }
+            else
+            {
+                returnValue += holder.X + ":" + holder.Y + ":" + _eatSpeed;
+            }
 
             return returnValue;
         }
@@ -79,11 +96,11 @@ namespace _100476935
 
                 if (_movementInfo[_index, 0] == 0)
                 {
-                    results[3].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
+                    results[2].Add(new Point(_testLocation.X - multiplacationHolder, _testLocation.Y));
                 }
                 else if (_movementInfo[_index, 0] == 1)
                 {
-                    results[3].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
+                    results[2].Add(new Point(_testLocation.X, _testLocation.Y - multiplacationHolder));
                 }
 
                 return false;

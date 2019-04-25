@@ -8,6 +8,8 @@ namespace _100476935
     public class ScaredCompas : ICritterController
     {
 
+        //scared wants to get out of the arena as quickly as possible, doesnt understand the concept of walls very well when on axis with the exit
+
         Point goal = new Point(-1, -1);
 
         System.Timers.Timer getInfoTimer;
@@ -133,7 +135,7 @@ namespace _100476935
                     break;
                 case "LOCATION":
                     map.UpdateCritterLocation(message);
-                    Responder(move.MoveCritter(map) + ":" +EatSpeed);
+                    Responder(move.MoveCritter(map));
                     break;
                 case "BUMP":
                     Responder("RANDOM_DESTINATION");

@@ -82,18 +82,18 @@ namespace _100476935
                     if (messageSegment.Contains("Terrain"))
                     {
                         target = GeneratePoint(messageSegment);
-                        ScaredCompasMapInfo[PointToString(target)][2] = true;
+                        ScaredCompasMapInfo[PointToString(target)][0] = true;
                         ScaredCompasMapInfo[PointToString(target)][3] = true;
                         for (int i = -4; i != 5; i++)
                         {
                             for (int i2 = -4; i2 != 5; i2++)
                             {
-                                ScaredCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][2] = true;
+                                ScaredCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][0] = true;
                                 ScaredCompasMapInfo[PointToString(new Point(target.X + i, target.Y + i2))][3] = true;
                             }
                         }
                     }
-                    else if (messageSegment.Contains("Bomb") || messageSegment.Contains("Terrain"))
+                    else if (messageSegment.Contains("Bomb"))
                     {
                         target = GeneratePoint(messageSegment);
                         ScaredCompasMapInfo[PointToString(target)][0] = true;

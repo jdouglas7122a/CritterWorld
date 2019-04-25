@@ -52,13 +52,13 @@
     <Compile Include="Popcorn Compas\ScaredCompasSettings.Designer.cs">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Scared Compas - correct style\ScaredCompas.cs" />
-    <Compile Include="Scared Compas - correct style\ScaredCompasMapping.cs" />
-    <Compile Include="Scared Compas - correct style\ScaredCompasMovment.cs" />
-    <Compile Include="Scared Compas - correct style\ScaredCompasSettings.cs">
+    <Compile Include="Scared Compas - complete-correct style\ScaredCompas.cs" />
+    <Compile Include="Scared Compas - complete-correct style\ScaredCompasMapping.cs" />
+    <Compile Include="Scared Compas - complete-correct style\ScaredCompasMovment.cs" />
+    <Compile Include="Scared Compas - complete-correct style\ScaredCompasSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Scared Compas - correct style\ScaredCompasSettings.Designer.cs">
+    <Compile Include="Scared Compas - complete-correct style\ScaredCompasSettings.Designer.cs">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Hungry Compas - complete-correctStyle\HungryCompasMoving.cs" />
@@ -78,7 +78,7 @@
     <EmbeddedResource Include="Popcorn Compas\ScaredCompasSettings.resx">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scared Compas - correct style\ScaredCompasSettings.resx">
+    <EmbeddedResource Include="Scared Compas - complete-correct style\ScaredCompasSettings.resx">
       <DependentUpon>ScaredCompasSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hungry Compas - complete-correctStyle\HungryCompasSettings.resx">
