@@ -16,8 +16,8 @@ namespace _100476935
             List<ICritterController> controllers = new List<ICritterController>();
 
             controllers.Add(new Tequila("Tequila_1"));
-            controllers.Add(new Popcorn("Popcorn_1"));
-            controllers.Add(new Spooked("Spooked_1"));
+            //controllers.Add(new Popcorn("Popcorn_1"));
+            //controllers.Add(new Spooked("Spooked_1"));
 
             return controllers.ToArray();
         }

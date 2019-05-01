@@ -125,6 +125,7 @@ namespace _100476935
                     break;
                 case "LOCATION":
                     map.UpdateCritterLocation(message);
+                    map.ArrivedAtPoint();
                     Responder(move.MoveCritter(map, EatSpeed));
                     break;
                 case "BUMP":
@@ -136,7 +137,6 @@ namespace _100476935
                     Responder(move.RandomDestination(map, EatSpeed));
                     break;
                 case "REACHED_DESTINATION":
-                    map.ArrivedAtPoint(message);
                     Responder("GET_LOCATION:3");
                     break;
             }

@@ -121,17 +121,14 @@ namespace _100476935
             }
         }
 
-        public void ArrivedAtPoint(string _location)
+        public void ArrivedAtPoint()
         {
             try
             {
-                Point Destination = GeneratePoint(_location);
-
-                string locationInfo = MapInfo[PointToString(Destination)];
-
-                if (locationInfo.Contains("Food") || locationInfo.Contains("Gift"))
+                string locationInfo = MapInfo[PointToString(CritterLocation)];
+                if (locationInfo == "Food" || locationInfo == "Gift" || locationInfo == "Bomb")
                 {
-                    MapInfo.Remove(PointToString(Destination));
+                    MapInfo.Remove(PointToString(CritterLocation));
                 }
             }
             catch (KeyNotFoundException) { };
