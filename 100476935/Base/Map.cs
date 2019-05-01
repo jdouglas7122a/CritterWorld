@@ -46,7 +46,7 @@ namespace _100476935
 
                     if (messageSegment.Contains("Escape"))
                     {
-                        UpdateMap(target, "Escape");
+                        UpdateMap(target, "Exit");
                     }
                     else if (messageSegment.Contains("Terrain"))
                     {
@@ -60,21 +60,17 @@ namespace _100476935
                     }
                     else if (messageSegment.Contains("Bomb"))
                     {
-                        for (int i = -2; i != 3; i++)
-                        {
-                            for (int i2 = -2; i2 != 3; i2++)
-                            {
-                                UpdateMap(new Point(target.X + i, target.Y + i2), "Bomb");
-                            }
-                        }
+                                UpdateMap(target, "Bomb");
                     }
                     else if (messageSegment.Contains("Food"))
                     {
-                        UpdateMap(target, "Food");
+                         UpdateMap(target, "Food");
                     }
                     else if (messageSegment.Contains("Gift"))
                     {
+                       
                         UpdateMap(target, "Gift");
+
                     }
                 });
             }

@@ -101,6 +101,7 @@ namespace _100476935
             switch (dividedMessage[0])
             {
                 case "LAUNCH":
+                    behavior.Add("Terrain", "Avoid");
                     move = new Movment(behavior);
                     arenaInitialized = false;
                     LoadSettings();
@@ -123,26 +124,19 @@ namespace _100476935
                     Responder("GET_LOCATION:3");
                     break;
                 case "LOCATION":
-                    Responder("STOP");
                     map.UpdateCritterLocation(message);
                     Responder(move.MoveCritter(map, EatSpeed));
                     break;
                 case "BUMP":
-                    Responder("STOP");
                     map.UpdateCritterLocation(message);
                     Responder(move.RandomDestination(map, EatSpeed));
                     break;
                 case "FIGHT":
-                    Responder("STOP");
                     map.UpdateCritterLocation(message);
                     Responder(move.RandomDestination(map, EatSpeed));
                     break;
                 case "REACHED_DESTINATION":
-                    Responder("STOP");
                     Responder("GET_LOCATION:3");
-                    break;
-                case "CRASHED":
-                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CrashReport.txt", message);
                     break;
             }
         }

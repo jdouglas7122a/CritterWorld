@@ -12,8 +12,7 @@ namespace _100476935
         {
             Name = name;
             behavior.Add("Bomb", "Avoid"); // can be Avoid, GoTo or DoNothing
-            behavior.Add("Terrain", "Avoid");
-            behavior.Add("Food", "Avoid");
+            behavior.Add("Food", "GoTo");
             behavior.Add("Gift", "Avoid");
             behavior.Add("Exit", "GoTo");
         }

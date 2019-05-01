@@ -75,12 +75,15 @@ namespace _100476935
             Array.ForEach(options, option =>
             {
                 counter = destinations[option].Count; // in the current destination key, check how many entrys there are
-                if (counter > 0 && behavior[option] == "GoTo")
+                if (counter > 0)
                 {
-                    destinations[option].ForEach(destination => // if the critter is specified to go to that option, add it to the results 
+                    if (behavior[option] == "GoTo")
                     {
-                        Results.Add(destination);
-                    });
+                        destinations[option].ForEach(destination => // if the critter is specified to go to that option, add it to the results 
+                        {
+                            Results.Add(destination);
+                        });
+                    }
                 }
             });
             if (Results.Count < 1)
