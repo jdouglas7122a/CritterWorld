@@ -1,6 +1,6 @@
 ﻿namespace _100476935
 {
-    partial class HungryCompasSettings
+    partial class TequilaSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -122,7 +122,7 @@
             this.trackBarHeadForExitSpeed.Value = 5;
             this.trackBarHeadForExitSpeed.Scroll += new System.EventHandler(this.TrackBarHeadForExitSpeed_Scroll);
             // 
-            // ChaserSettings
+            // TequilaSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -135,8 +135,8 @@
             this.Controls.Add(this.trackBarNominalFeedingSpeed);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Name = "ChaserSettings";
-            this.Text = "Chaser Settings";
+            this.Name = "TequilaSettings";
+            this.Text = "Tequila Settings";
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNominalFeedingSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarHeadForExitSpeed)).EndInit();
             this.ResumeLayout(false);

@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace _100476935
 {
-    public partial class HungryCompasSettings : Form
+    public partial class TequilaSettings : Form
     {
-        HungryCompas critter;
+        Tequila critter;
 
-        public HungryCompasSettings(HungryCompas hungryCompas)
+        public TequilaSettings(Tequila tequila)
         {
-            critter = hungryCompas;
+            critter = tequila;
 
             InitializeComponent();
 

@@ -2,17 +2,18 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Collections.Generic;
 
 namespace _100476935
 {
-    public class ScaredCompas : ICritterController
+    public abstract class BaseCritter : ICritterController
     {
-
-        //scared wants to get out of the arena as quickly as possible, doesnt understand the concept of walls very well when on axis with the exit
-
         Point goal = new Point(-1, -1);
+        protected Dictionary<string, string> behavior = new Dictionary<string, string>();
 
-        System.Timers.Timer getInfoTimer;
+        Map map;
+
+        Movment move = new Movment();
 
         public string Name { get; set; }
 
@@ -28,11 +29,7 @@ namespace _100476935
 
         public bool arenaInitialized = false;
 
-        public ScaredCompasMap map = new ScaredCompasMap();
-
-        public ScaredCompasMovment move = new ScaredCompasMovment();
-
-        private void Log(string message)
+        protected void Log(string message)
         {
             if (Logger == null)
             {
@@ -44,9 +41,13 @@ namespace _100476935
             }
         }
 
-        private void LoadSettings()
+        protected void SetDestination(Point coordinate, int speed)
         {
-            string fileName = "ScaredCompas.cfg";
+            Responder("SET_DESTINATION:" + coordinate.X + ":" + coordinate.Y + ":" + speed);
+        }
+        public void LoadSettings()
+        {
+            string fileName = Name + ".cfg";
             string fileSpec = Filepath + "/" + fileName;
             try
             {
@@ -73,14 +74,14 @@ namespace _100476935
                 Log("Reading configuration " + fileSpec + " failed due to " + e);
             }
         }
-
         public void SaveSettings()
         {
-            string fileName = "ScaredCompas.cfg";
+            string fileName = Name + ".cfg";
             string fileSpec = Filepath + "/" + fileName;
             try
             {
-                using (StreamWriter writer = new StreamWriter(fileSpec, false)) {
+                using (StreamWriter writer = new StreamWriter(fileSpec, false))
+                {
                     writer.WriteLine("EatSpeed=" + EatSpeed);
                     writer.WriteLine("HeadForExitSpeed=" + HeadForExitSpeed);
                 }
@@ -91,26 +92,16 @@ namespace _100476935
             }
         }
 
-        public ScaredCompas(string name)
-        {
-            Name = name;
-        }
-
-        public void LaunchUI()
-        {
-            ScaredCompasSettings settings = new ScaredCompasSettings(this);
-            settings.Show();
-            settings.Focus();
-        }
+        public abstract void LaunchUI();
 
         public void Receive(string message)
         {
-            Log("Message from body for " + Name + ": " + message);
-            string[] msgParts = message.Split(':');
-            string notification = msgParts[0];
-            switch (notification)
+            string[] dividedMessage = DivideMessage(message);
+
+            switch (dividedMessage[0])
             {
                 case "LAUNCH":
+                    move = new Movment(behavior);
                     arenaInitialized = false;
                     LoadSettings();
                     Responder("STOP");
@@ -122,10 +113,8 @@ namespace _100476935
                         map.UpdateMap(message);
                     }
                     break;
-                case "CRASHED":
-                    break;
                 case "ARENA_SIZE":
-                    map = new ScaredCompasMap(message);
+                    map = new Map(message);
                     arenaInitialized = true;
                     Responder("SCAN:2");
                     break;
@@ -134,17 +123,41 @@ namespace _100476935
                     Responder("GET_LOCATION:3");
                     break;
                 case "LOCATION":
+                    Responder("STOP");
                     map.UpdateCritterLocation(message);
-                    Responder(move.MoveCritter(map, EatSpeed, HeadForExitSpeed));
+                    Responder(move.MoveCritter(map, EatSpeed));
                     break;
                 case "BUMP":
                     Responder("STOP");
-                    Responder("RANDOM_DESTINATION");
+                    map.UpdateCritterLocation(message);
+                    Responder(move.RandomDestination(map, EatSpeed));
+                    break;
+                case "FIGHT":
+                    Responder("STOP");
+                    map.UpdateCritterLocation(message);
+                    Responder(move.RandomDestination(map, EatSpeed));
                     break;
                 case "REACHED_DESTINATION":
+                    Responder("STOP");
                     Responder("GET_LOCATION:3");
+                    break;
+                case "CRASHED":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CrashReport.txt", message);
                     break;
             }
         }
+
+        public string[] DivideMessage(string _message)
+        {
+            string[] returnValue;
+
+            Log("Message from body for " + Name + ": " + _message);
+            returnValue = _message.Split(':');
+
+            return returnValue;
+        }
+
+
+
     }
 }
