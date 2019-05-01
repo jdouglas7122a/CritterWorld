@@ -11,10 +11,10 @@ namespace _100476935
         public Tequila(string name)
         {
             Name = name;
-            behavior.Add("Bomb", "Avoid"); // can be Avoid, GoTo or DoNothing
+            behavior.Add("Bomb", "GoTo");
             behavior.Add("Food", "GoTo");
             behavior.Add("Gift", "Avoid");
-            behavior.Add("Exit", "GoTo");
+            behavior.Add("Exit", "Avoid");
         }
         public override void LaunchUI()
         {

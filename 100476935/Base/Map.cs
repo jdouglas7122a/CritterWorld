@@ -121,13 +121,29 @@ namespace _100476935
             }
         }
 
+        public void ArrivedAtPoint(string _location)
+        {
+            try
+            {
+                Point Destination = GeneratePoint(_location);
+
+                string locationInfo = MapInfo[PointToString(Destination)];
+
+                if (locationInfo.Contains("Food") || locationInfo.Contains("Gift"))
+                {
+                    MapInfo.Remove(PointToString(Destination));
+                }
+            }
+            catch (KeyNotFoundException) { };
+        }
+
         public void UpdateMap(Point _location, string type)
         {
             try
             {
                 MapInfo.Add(PointToString(_location), type);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 if (type == "Terrain" && MapInfo[PointToString(_location)] != "Terrain")
                 {

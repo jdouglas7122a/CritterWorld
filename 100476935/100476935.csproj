@@ -46,7 +46,21 @@
     <Compile Include="Base\Movment.cs" />
     <Compile Include="Base\Map.cs" />
     <Compile Include="Base\Critter.cs" />
-    <Compile Include="Tequila.cs" />
+    <Compile Include="settings\Spooked.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="settings\Spooked.Designer.cs">
+      <DependentUpon>Spooked.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Critters\Spooked.cs" />
+    <Compile Include="Critters\Popcorn.cs" />
+    <Compile Include="settings\PopcornSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="settings\PopcornSettings.Designer.cs">
+      <DependentUpon>PopcornSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Critters\Tequila.cs" />
     <Compile Include="settings\TequilaSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +81,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="settings\Spooked.resx">
+      <DependentUpon>Spooked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="settings\PopcornSettings.resx">
+      <DependentUpon>PopcornSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="settings\TequilaSettings.resx">
       <DependentUpon>TequilaSettings.cs</DependentUpon>
     </EmbeddedResource>

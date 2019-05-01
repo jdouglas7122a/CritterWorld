@@ -136,6 +136,7 @@ namespace _100476935
                     Responder(move.RandomDestination(map, EatSpeed));
                     break;
                 case "REACHED_DESTINATION":
+                    map.ArrivedAtPoint(message);
                     Responder("GET_LOCATION:3");
                     break;
             }

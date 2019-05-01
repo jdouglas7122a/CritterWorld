@@ -104,10 +104,10 @@ namespace _100476935
 
             do
             {
-                Point alteration = locationAlteration[rand.Next(4)];
+                Point alteration = locationAlteration[rand.Next(locationAlteration.Count)];
                 holder = new Point(holder.X + alteration.X, holder.Y + alteration.Y);
             }
-            while (holder.X >= _map.mapWidth || holder.X <= 0 || holder.Y >= _map.mapHeight || holder.Y <= 0);
+            while ((holder.X >= _map.mapWidth || holder.X <= 0 || holder.Y >= _map.mapHeight || holder.Y <= 0|| (holder.X == _map.CritterLocation.X && holder.Y == _map.CritterLocation.Y)));
 
             return "SET_DESTINATION:" + holder.X + ":" + holder.Y + ":" + _eatSpeed;
         }
@@ -129,6 +129,7 @@ namespace _100476935
                             wallHit = true;
                         }
                         destinations[option].Add(_testLocation);
+                        
                     }
                 });
 
@@ -147,6 +148,10 @@ namespace _100476935
         {
             List<Point> returnValue = new List<Point>();
 
+            returnValue.Add(new Point(50, 0));
+            returnValue.Add(new Point(150, 0));
+            returnValue.Add(new Point(0, 50));
+            returnValue.Add(new Point(0, 150));
             returnValue.Add(new Point(0, 100));
             returnValue.Add(new Point(0, -100));
             returnValue.Add(new Point(100, 0));
