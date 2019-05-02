@@ -66,64 +66,6 @@ namespace _100476935
             return resultSelection(_map, _eatSpeed);
         }
 
-        private string resultSelection(Map _map, int _eatSpeed)
-        {
-            Point holder = new Point(0, 0);
-            int counter = 0;
-            List<Point> Results = new List<Point>();
-
-            Array.ForEach(options, option =>
-            {
-                counter = destinations[option].Count; // in the current destination key, check how many entrys there are
-                if (counter > 0)
-                {
-                    if (behavior[option] == "GoTo")
-                    {
-                        destinations[option].ForEach(destination => // if the critter is specified to go to that option, add it to the results 
-                        {
-                            Results.Add(destination);
-                        });
-                    }
-                }
-            });
-            if (Results.Count < 1)
-            {
-                return RandomDestination(_map, _eatSpeed);
-            }
-            else
-            {
-                do
-                {
-                    holder = Results[rand.Next(Results.Count)];
-                    if(holder.X == _map.CritterLocation.X && holder.Y == _map.CritterLocation.Y && Results.Count == 1)
-                    {
-                        return RandomDestination(_map, _eatSpeed);
-                    }
-                }
-                while (holder.X == _map.CritterLocation.X && holder.Y == _map.CritterLocation.Y);
-                return "SET_DESTINATION:" + holder.X + ":" + holder.Y + ":" + _eatSpeed;
-            }
-        }
-
-        public string RandomDestination(Map _map, int _eatSpeed)
-        {
-            Point holder = _map.CritterLocation;
-            List<Point> locationAlteration = GenerateRandomPoints();
-            do
-            {
-                do
-                {
-                    Point alteration = locationAlteration[rand.Next(locationAlteration.Count)];
-                    holder = new Point(holder.X + alteration.X, holder.Y + alteration.Y);
-                }
-                while (holder.X >= _map.mapWidth || holder.X <= 0 || holder.Y >= _map.mapHeight || holder.Y <= 0);
-            }
-            while (holder.X == _map.CritterLocation.X && holder.Y == _map.CritterLocation.Y);
-           
-
-            return "SET_DESTINATION:" + holder.X + ":" + holder.Y + ":" + _eatSpeed;
-        }
-
         private Boolean CheckLocation(Map _map, Point _testLocation)
         {
             string holder = "";
@@ -158,21 +100,80 @@ namespace _100476935
             }
         }
 
+        private string resultSelection(Map _map, int _eatSpeed)
+        {
+            Point holder = new Point(0, 0);
+            int counter = 0;
+            List<Point> Results = new List<Point>();
+
+            Array.ForEach(options, option =>
+            {
+                counter = destinations[option].Count; // in the current destination key, check how many entrys there are
+                if (counter > 0)
+                {
+                    if (behavior[option] == "GoTo")
+                    {
+                        destinations[option].ForEach(destination => // if the critter is specified to go to that option, add it to the results 
+                        {
+                            Results.Add(destination);
+                        });
+                    }
+                }
+            });
+            if (Results.Count < 1)
+            {
+                return RandomDestination(_map, _eatSpeed);
+            }
+            else
+            {
+                do
+                {
+                    holder = Results[rand.Next(Results.Count)];
+                }
+                while (holder.X == _map.CritterLocation.X && holder.Y == _map.CritterLocation.Y);
+                return "SET_DESTINATION:" + holder.X + ":" + holder.Y + ":" + _eatSpeed;
+            }
+        }
+
+        public string RandomDestination(Map _map, int _eatSpeed)
+        {
+            Point holder = _map.CritterLocation;
+            List<Point> locationAlteration = GenerateRandomPoints();
+            Point alteration = locationAlteration[rand.Next(locationAlteration.Count)];
+
+            do
+            {
+                while (alteration == new Point(0, 0))
+                {
+                    alteration = locationAlteration[rand.Next(locationAlteration.Count)];
+                }
+                holder = new Point(holder.X + alteration.X, holder.Y + alteration.Y);
+            }
+            while (holder.X >= _map.mapWidth || holder.X <= 0 || holder.Y >= _map.mapHeight || holder.Y <= 0);
+            return "SET_DESTINATION:" + holder.X + ":" + holder.Y + ":" + _eatSpeed;
+        }
+
         private List<Point> GenerateRandomPoints()
         {
             List<Point> returnValue = new List<Point>();
 
             returnValue.Add(new Point(50, 0));
+            returnValue.Add(new Point(100, 0));
             returnValue.Add(new Point(150, 0));
             returnValue.Add(new Point(0, 50));
             returnValue.Add(new Point(0, 150));
             returnValue.Add(new Point(0, 100));
-            returnValue.Add(new Point(0, -100));
-            returnValue.Add(new Point(100, 0));
+            returnValue.Add(new Point(-50, 0));
             returnValue.Add(new Point(-100, 0));
+            returnValue.Add(new Point(-150, 0));
+            returnValue.Add(new Point(0, -50));
+            returnValue.Add(new Point(0, -150));
+            returnValue.Add(new Point(0, -100));
 
             return returnValue;
         }
+
+
 
     }
 }
