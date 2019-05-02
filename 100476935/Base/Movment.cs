@@ -14,6 +14,8 @@ namespace _100476935
         private Dictionary<string, List<Point>> destinations; // all locations that can be 
         Dictionary<string, string> behavior;
         Random rand = new Random();
+        Point previousDestination;
+
 
         public Movment()
         {
@@ -44,6 +46,7 @@ namespace _100476935
             int[] distanceTraveled = new int[4] { 0, 0, 0, 0 };
             int[] incrementDecrement = new int[4] { 1, -1, -1, 1 };
             int[] finishingLocation = new int[4] { 0, 0, 0, 0 };
+            Point returnValue;
 
             for (int index = 0; index != 4; index++) // for each direction
             {
@@ -60,13 +63,15 @@ namespace _100476935
                     {
                         testLocation = new Point(_map.CritterLocation.X, _map.CritterLocation.Y + distanceTraveled[index]);
                     }
-                    goFurther = CheckLocation(_map, testLocation);
+                    goFurther = CheckLocation(_map, testLocation, distanceTraveled[index]);
                 }
             }
-            return resultSelection(_map, _eatSpeed);
+            returnValue = resultSelection(_map);
+
+            return MoveMessageCheck(returnValue, _map, _eatSpeed); 
         }
 
-        private Boolean CheckLocation(Map _map, Point _testLocation)
+        private Boolean CheckLocation(Map _map, Point _testLocation, int distanceTraveled)
         {
             string holder = "";
             Boolean wallHit = false;
@@ -84,7 +89,11 @@ namespace _100476935
                         }
                         else
                         {
-                            destinations[option].Add(_testLocation);
+                            if(distanceTraveled < 25)
+                            {
+                                destinations[option].Add(_testLocation);
+                            }
+
                         }
                     }
                 });
@@ -100,9 +109,9 @@ namespace _100476935
             }
         }
 
-        private string resultSelection(Map _map, int _eatSpeed)
+        private Point resultSelection(Map _map)
         {
-            Point holder = new Point(0, 0);
+            Point holder = _map.CritterLocation;
             int counter = 0;
             List<Point> Results = new List<Point>();
 
@@ -122,58 +131,50 @@ namespace _100476935
             });
             if (Results.Count < 1)
             {
-                return RandomDestination(_map, _eatSpeed);
+                return RandomDestination(_map);
             }
             else
             {
                 do
                 {
-                    holder = Results[rand.Next(Results.Count)];
+                     holder = Results[rand.Next(Results.Count)];
                 }
-                while (holder.X == _map.CritterLocation.X && holder.Y == _map.CritterLocation.Y);
-                return "SET_DESTINATION:" + holder.X + ":" + holder.Y + ":" + _eatSpeed;
+                 while (holder.X == _map.CritterLocation.X && holder.Y == _map.CritterLocation.Y);
+                return holder;
             }
         }
 
-        public string RandomDestination(Map _map, int _eatSpeed)
+        public Point RandomDestination(Map _map)
         {
-            Point holder = _map.CritterLocation;
-            List<Point> locationAlteration = GenerateRandomPoints();
-            Point alteration = locationAlteration[rand.Next(locationAlteration.Count)];
+            int[] holder = new int[2] {_map.CritterLocation.X, _map.CritterLocation.Y};
+            int[] alteration = GenerateRandomPoints();
+            holder[0] += alteration[0];
+            holder[1] += alteration[1];
+            return new Point(holder[0], holder[1]);
+        }
 
-            do
+
+        public string MoveMessageCheck(Point _message, Map _map, int _eatSpeed)
+        {
+            while(_message == previousDestination)
             {
-                while (alteration == new Point(0, 0))
-                {
-                    alteration = locationAlteration[rand.Next(locationAlteration.Count)];
-                }
-                holder = new Point(holder.X + alteration.X, holder.Y + alteration.Y);
+                _message = RandomDestination(_map);
             }
-            while (holder.X >= _map.mapWidth || holder.X <= 0 || holder.Y >= _map.mapHeight || holder.Y <= 0);
-            return "SET_DESTINATION:" + holder.X + ":" + holder.Y + ":" + _eatSpeed;
+            previousDestination = _message;
+            return "SET_DESTINATION:" + _message.X + ":" + _message.Y +":" + _eatSpeed;
         }
 
-        private List<Point> GenerateRandomPoints()
+        private int[] GenerateRandomPoints()
         {
-            List<Point> returnValue = new List<Point>();
+            List<int[]> returnValue = new List<int[]>();
 
-            returnValue.Add(new Point(50, 0));
-            returnValue.Add(new Point(100, 0));
-            returnValue.Add(new Point(150, 0));
-            returnValue.Add(new Point(0, 50));
-            returnValue.Add(new Point(0, 150));
-            returnValue.Add(new Point(0, 100));
-            returnValue.Add(new Point(-50, 0));
-            returnValue.Add(new Point(-100, 0));
-            returnValue.Add(new Point(-150, 0));
-            returnValue.Add(new Point(0, -50));
-            returnValue.Add(new Point(0, -150));
-            returnValue.Add(new Point(0, -100));
+            returnValue.Add(new int[2] {0, 100});
+            returnValue.Add(new int[2] { 0, -100 });
+            returnValue.Add(new int[2] { 100, 0 });
+            returnValue.Add(new int[2] { 100, 0 });
 
-            return returnValue;
+            return returnValue[rand.Next(returnValue.Count)];
         }
-
-
 
     }
 }

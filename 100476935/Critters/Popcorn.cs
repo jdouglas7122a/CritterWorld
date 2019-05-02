@@ -15,6 +15,7 @@ namespace _100476935
             behavior.Add("Food", "GoTo");
             behavior.Add("Gift", "Avoid");
             behavior.Add("Exit", "GoTo");
+            behavior.Add("Terrain", "Avoid");
         }
         public override void LaunchUI()
         {

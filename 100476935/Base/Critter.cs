@@ -9,6 +9,7 @@ namespace _100476935
     public abstract class BaseCritter : ICritterController
     {
         Point goal = new Point(-1, -1);
+
         protected Dictionary<string, string> behavior = new Dictionary<string, string>();
 
         Map map;
@@ -41,10 +42,6 @@ namespace _100476935
             }
         }
 
-        protected void SetDestination(Point coordinate, int speed)
-        {
-            Responder("SET_DESTINATION:" + coordinate.X + ":" + coordinate.Y + ":" + speed);
-        }
         public void LoadSettings()
         {
             string fileName = Name + ".cfg";
@@ -101,9 +98,8 @@ namespace _100476935
             switch (dividedMessage[0])
             {
                 case "LAUNCH":
-                    behavior.Add("Terrain", "Avoid");
-                    move = new Movment(behavior);
                     arenaInitialized = false;
+                    move = new Movment(behavior);
                     LoadSettings();
                     Responder("STOP");
                     Responder("GET_ARENA_SIZE:1");
@@ -130,14 +126,17 @@ namespace _100476935
                     break;
                 case "BUMP":
                     map.UpdateCritterLocation(message);
-                    Responder(move.RandomDestination(map, EatSpeed));
+                    Responder(move.MoveMessageCheck(move.RandomDestination(map), map, EatSpeed));
                     break;
                 case "FIGHT":
                     map.UpdateCritterLocation(message);
-                    Responder(move.RandomDestination(map, EatSpeed));
+                    Responder(move.MoveMessageCheck(move.RandomDestination(map), map, EatSpeed));
                     break;
                 case "REACHED_DESTINATION":
                     Responder("GET_LOCATION:3");
+                    break;
+                case "CRASHED":
+                    System.IO.File.WriteAllText(@"C:\Users\jdoug\Desktop\CrashReport.txt", message);
                     break;
             }
         }
@@ -151,8 +150,5 @@ namespace _100476935
 
             return returnValue;
         }
-
-
-
     }
 }
